@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instintos da Caça — Livro Oficial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#1a1208;--ink-light:#3d2b0f;--parchment:#f5edd8;--parchment-dark:#e8d9bc;
+  --parchment-border:#c9a96e;--blood:#8b1a1a;--gold:#a07820;--gold-light:#c9a030;
+  --forest:#2d4a1e;--forest-light:#4a7a32;--ash:#5a4a35;--blue-dark:#1a2d4a;
+  --shadow:rgba(26,18,8,.15);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Crimson Text',Georgia,serif;background:#2a1e0e;color:var(--ink);font-size:17px;line-height:1.75;margin:0}
+
+/* ═══ LAYOUT ═══ */
+.page-wrap{max-width:860px;margin:0 auto;background:var(--parchment);box-shadow:0 0 60px rgba(0,0,0,.6)}
+
+/* ═══ CAPA ═══ */
+.book-cover{
+  background:linear-gradient(160deg,#0d0900 0%,#1a1005 30%,#0f0b04 70%,#0d0900 100%);
+  color:#f5edd8;min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;padding:60px 40px;
+  position:relative;overflow:hidden;
+}
+.cover-bg-ornament{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-size:400px;opacity:.03;pointer-events:none;user-select:none;
+  filter:blur(2px);
+}
+.cover-sep{width:220px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:22px auto}
+.cover-main-title{
+  font-family:'Cinzel',serif;font-size:56px;font-weight:700;letter-spacing:5px;
+  color:var(--gold-light);text-shadow:0 2px 20px rgba(0,0,0,.8);line-height:1.1;
+  position:relative;
+}
+.cover-tagline{font-style:italic;font-size:16px;color:#c4b08a;max-width:420px;margin:0 auto;line-height:1.7;position:relative}
+.cover-edition{font-family:'Cinzel',serif;font-size:10px;letter-spacing:5px;color:#6a5535;margin-top:40px;text-transform:uppercase;position:relative}
+.cover-claw{position:absolute;font-size:160px;opacity:.06;top:40px;right:60px;transform:rotate(20deg)}
+.cover-claw2{position:absolute;font-size:100px;opacity:.04;bottom:80px;left:40px;transform:rotate(-15deg)}
+
+/* ═══ NAV ═══ */
+.main-nav{background:#160f05;border-bottom:3px solid var(--gold);position:sticky;top:0;z-index:200;display:flex;flex-wrap:wrap}
+.nav-sec{display:flex;flex-wrap:wrap;width:100%;border-bottom:1px solid #2a1e0e}
+.nav-sec:last-child{border-bottom:none}
+.nav-label{font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;color:#4a3520;text-transform:uppercase;padding:6px 14px;display:flex;align-items:center;border-right:1px solid #2a1e0e;white-space:nowrap;min-width:fit-content}
+.nav-btns{display:flex;flex-wrap:wrap}
+.nb{font-family:'Cinzel',serif;font-size:9.5px;letter-spacing:1px;color:#b89050;background:none;border:none;border-right:1px solid #2a1e0e;padding:8px 12px;cursor:pointer;text-transform:uppercase;white-space:nowrap;transition:all .2s}
+.nb:hover,.nb.active{background:#0d0900;color:var(--gold-light)}
+
+/* ═══ CHAPTERS ═══ */
+.chapter{display:none;padding:44px 48px;min-height:600px;background:var(--parchment)}
+.chapter.active{display:block}
+
+.ch-header{text-align:center;margin-bottom:36px;padding-bottom:24px;border-bottom:1px solid var(--parchment-border)}
+.ch-num{font-family:'Cinzel',serif;font-size:10px;letter-spacing:4px;color:var(--ash);text-transform:uppercase;margin-bottom:8px}
+.ch-title{font-family:'Cinzel',serif;font-size:28px;font-weight:700;color:var(--ink-light);line-height:1.25}
+.ch-epigraph{font-style:italic;color:var(--ash);font-size:15px;max-width:480px;margin:14px auto 0;line-height:1.6}
+
+h2{font-family:'Cinzel',serif;font-size:17px;font-weight:600;color:var(--blood);letter-spacing:1px;margin:32px 0 12px;padding-bottom:6px;border-bottom:1px solid rgba(139,26,26,.2)}
+h3{font-family:'Cinzel',serif;font-size:14px;font-weight:600;color:var(--forest);letter-spacing:.5px;margin:22px 0 8px}
+p{margin-bottom:14px}
+
+.drop-cap::first-letter{font-family:'Cinzel',serif;font-size:52px;font-weight:700;float:left;line-height:.85;margin:4px 8px 0 0;color:var(--blood)}
+
+/* ═══ BOXES ═══ */
+.rulebox,.greenbox,.goldbox,.bluebox{border-radius:2px;padding:16px 20px;margin:20px 0;font-size:15.5px}
+.rulebox{background:var(--parchment-dark);border:1px solid var(--parchment-border);border-left:4px solid var(--blood)}
+.greenbox{background:#edf3e8;border:1px solid #b5cfa0;border-left:4px solid var(--forest)}
+.goldbox{background:#fdf6e3;border:1px solid var(--parchment-border);border-left:4px solid var(--gold)}
+.bluebox{background:#e8edf5;border:1px solid #aabbd4;border-left:4px solid var(--blue-dark)}
+.rl{font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px}
+.rulebox .rl{color:var(--blood)}.greenbox .rl{color:var(--forest)}.goldbox .rl{color:var(--gold)}.bluebox .rl{color:var(--blue-dark)}
+
+.example-box{background:#f0ead8;border:1px dashed var(--parchment-border);border-radius:3px;padding:16px 20px;margin:20px 0;font-size:15px;color:var(--ink-light)}
+.ex{font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--ash);font-style:normal;margin-bottom:8px}
+
+/* ═══ TABLE ═══ */
+table{width:100%;border-collapse:collapse;font-size:14.5px;margin:16px 0}
+th{font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--ash);text-align:left;padding:8px 10px;border-bottom:2px solid var(--parchment-border)}
+td{padding:8px 10px;border-bottom:1px solid rgba(201,169,110,.25);vertical-align:top;line-height:1.5}
+tr:nth-child(even) td{background:rgba(201,169,110,.08)}
+
+hr.orn{border:none;text-align:center;overflow:visible;height:20px;margin:28px 0}
+hr.orn::after{content:'✦  ✦  ✦';font-size:12px;letter-spacing:8px;color:var(--parchment-border)}
+
+/* ═══ DICE ═══ */
+.dice-result{display:flex;gap:12px;margin:16px 0;flex-wrap:wrap}
+.dice-item{flex:1;min-width:150px;background:var(--parchment-dark);border:1px solid var(--parchment-border);border-radius:3px;padding:12px 16px;text-align:center}
+.dice-range{font-family:'Cinzel',serif;font-size:20px;font-weight:700;margin-bottom:4px}
+.dice-label{font-size:13px;color:var(--ash);font-style:italic;line-height:1.4}
+.dice-item.s .dice-range{color:var(--forest)}.dice-item.p .dice-range{color:var(--gold)}.dice-item.f .dice-range{color:var(--blood)}
+
+/* ═══ ATTRS ═══ */
+.attr-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:16px 0}
+.attr-card{background:var(--parchment-dark);border:1px solid var(--parchment-border);border-radius:3px;padding:14px 16px}
+.attr-name{font-family:'Cinzel',serif;font-size:13px;font-weight:600;color:var(--blood);margin-bottom:4px}
+.attr-desc{font-size:14px;line-height:1.5}
+
+/* ═══ ESTADOS ═══ */
+.estado-list{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.estado{display:inline-block;padding:4px 12px;border-radius:2px;font-family:'Cinzel',serif;font-size:11px;letter-spacing:1px;text-transform:uppercase}
+.estado.ok{background:#edf3e8;color:var(--forest);border:1px solid #b5cfa0}
+.estado.arr{background:#fdf6e3;color:#7a5c10;border:1px solid #c9a96e}
+.estado.feri{background:#fae8e8;color:#7a1010;border:1px solid #d49090}
+.estado.criti{background:#3d1010;color:#f5c0c0;border:1px solid #7a1010}
+
+/* ═══ COMBAT STEPS ═══ */
+.combat-step{display:flex;gap:14px;margin-bottom:14px;align-items:flex-start}
+.step-n{flex-shrink:0;width:32px;height:32px;background:var(--blood);color:#f5edd8;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:13px;font-weight:700;margin-top:2px}
+.step-body{flex:1;font-size:15.5px;line-height:1.6}
+
+/* ═══ TRAITS ═══ */
+.trait-category{font-family:'Cinzel',serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin:22px 0 10px;padding-bottom:4px;border-bottom:1px solid rgba(160,120,32,.3)}
+.trait-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:8px}
+.trait-card{background:var(--parchment-dark);border:1px solid var(--parchment-border);border-radius:3px;padding:12px 14px}
+.trait-card.hl{border-left:3px solid var(--blood)}
+.trait-name{font-family:'Cinzel',serif;font-size:13px;font-weight:600;color:var(--blood);margin-bottom:3px}
+.trait-tag{display:inline-block;font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;background:var(--parchment-border);color:var(--ink);padding:2px 7px;border-radius:2px;margin-bottom:5px}
+.trait-desc{font-size:13.5px;line-height:1.5;color:var(--ink-light)}
+.trait-mod{font-size:12.5px;color:var(--forest);font-family:'Cinzel',serif;font-weight:600;margin-top:4px}
+
+/* ═══ INSTINTOS ═══ */
+.if-wrap{background:var(--parchment-dark);border:1px solid var(--parchment-border);border-radius:3px;padding:18px 22px;margin:14px 0}
+.if-header{display:flex;align-items:flex-start;gap:14px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--parchment-border)}
+.if-icon{font-size:34px;flex-shrink:0}
+.if-name{font-family:'Cinzel',serif;font-size:17px;font-weight:700;color:var(--blood);margin-bottom:2px}
+.if-type{font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--ash)}
+.if-style{font-style:italic;font-size:14px;color:var(--ink-light);margin-top:2px}
+.if-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:10px 0}
+.if-stat{background:var(--parchment);border:1px solid var(--parchment-border);border-radius:2px;padding:8px 10px;text-align:center}
+.if-stat-label{font-family:'Cinzel',serif;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--ash);margin-bottom:3px}
+.if-stat-val{font-family:'Cinzel',serif;font-size:14px;font-weight:700;color:var(--blood)}
+.hab-item{padding:10px 0;border-bottom:1px solid rgba(201,169,110,.2)}
+.hab-item:last-child{border-bottom:none}
+.hab-name{font-family:'Cinzel',serif;font-size:12px;font-weight:600;color:var(--forest)}
+.hab-cost{display:inline-block;font-family:'Cinzel',serif;font-size:9px;letter-spacing:1px;background:var(--blood);color:#f5edd8;padding:1px 7px;border-radius:2px;margin-left:6px;font-weight:700}
+.hab-tag{display:inline-block;font-family:'Cinzel',serif;font-size:9px;letter-spacing:1px;text-transform:uppercase;border:1px solid var(--parchment-border);color:var(--ash);padding:1px 6px;border-radius:2px;margin-right:4px;margin-bottom:3px}
+.hab-desc{font-size:14px;line-height:1.55;margin-top:4px}
+.profile-block{display:flex;gap:12px;margin:10px 0;flex-wrap:wrap}
+.profile-item{flex:1;min-width:130px;background:var(--parchment);border:1px solid var(--parchment-border);border-radius:2px;padding:9px 12px}
+.pi-label{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--ash);margin-bottom:4px}
+.pi-val{font-size:13.5px;line-height:1.5}
+
+/* ═══ CONDITIONS ═══ */
+.cond-full{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:14px 0}
+.cond-card{background:var(--parchment-dark);border:1px solid var(--parchment-border);border-radius:3px;padding:14px 16px}
+.cond-header{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.cond-icon{font-size:20px}
+.cond-name{font-family:'Cinzel',serif;font-size:13px;font-weight:700;color:var(--gold)}
+.cond-body{font-size:13.5px;line-height:1.5;margin-bottom:6px}
+.cond-row{font-size:12.5px;margin:3px 0;line-height:1.5}
+.cond-row strong{font-family:'Cinzel',serif;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--ash)}
+
+/* ═══ COST TABLE ═══ */
+.cost-row{display:flex;align-items:center;gap:12px;padding:7px 0;border-bottom:1px solid rgba(201,169,110,.2);font-size:14.5px}
+.cost-row:last-child{border-bottom:none}
+.cost-badge{font-family:'Cinzel',serif;font-size:12px;font-weight:700;min-width:34px;text-align:center;padding:2px 8px;border-radius:2px}
+.cb1{background:#edf3e8;color:var(--forest);border:1px solid #b5cfa0}
+.cb2{background:#fdf6e3;color:#7a5c10;border:1px solid #c9a96e}
+.cb3{background:#fae8e8;color:#7a1010;border:1px solid #d49090}
+
+/* ═══ BUILDER GRID ═══ */
+.builder-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+.builder-cell{background:var(--parchment-dark);border:1px solid var(--parchment-border);border-radius:3px;padding:10px 12px}
+.bc-label{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--ash);margin-bottom:4px}
+.bc-value{font-size:14px;font-weight:600;color:var(--ink)}
+
+/* ═══ EQUIPMENT ═══ */
+.equip-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:14px 0}
+.equip-card{background:var(--parchment-dark);border:1px solid var(--parchment-border);border-radius:3px;padding:14px 16px}
+.eq-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--parchment-border)}
+.eq-icon{font-size:22px}
+.eq-name{font-family:'Cinzel',serif;font-size:14px;font-weight:700;color:var(--blood)}
+.eq-slot{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--ash)}
+.eq-desc{font-size:13.5px;line-height:1.5;margin-bottom:6px}
+.eq-stat{font-family:'Cinzel',serif;font-size:11px;color:var(--forest);font-weight:600}
+.eq-folego{display:inline-block;background:#fae8e8;border:1px solid #d49090;color:#7a1010;font-family:'Cinzel',serif;font-size:10px;letter-spacing:1px;padding:2px 8px;border-radius:2px;margin-top:4px}
+.eq-folego.n{background:#edf3e8;border:1px solid #b5cfa0;color:var(--forest)}
+.eq-folego.z{background:var(--parchment);border:1px solid var(--parchment-border);color:var(--ash)}
+
+.weapon-type{font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:2px 8px;border-radius:2px;display:inline-block;margin-bottom:4px}
+.wt-1m{background:#edf3e8;color:var(--forest);border:1px solid #b5cfa0}
+.wt-2m{background:#fae8e8;color:#7a1010;border:1px solid #d49090}
+.wt-sp{background:#fdf6e3;color:#7a5c10;border:1px solid #c9a96e}
+
+/* ═══ FICHA INTERATIVA ═══ */
+.sheet-bg{background:linear-gradient(135deg,#1a1208 0%,#2d1f0a 100%);padding:30px;min-height:100vh}
+.sheet-paper{background:var(--parchment);border:2px solid var(--parchment-border);border-radius:4px;max-width:780px;margin:0 auto;padding:30px;box-shadow:0 8px 40px rgba(0,0,0,.5)}
+.sheet-title{font-family:'Cinzel',serif;font-size:11px;letter-spacing:4px;text-align:center;color:var(--blood);text-transform:uppercase;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid var(--parchment-border)}
+
+.sheet-top{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px}
+.sf{display:flex;flex-direction:column;gap:3px}
+.sf label{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--ash)}
+.sf input,.sf select,.sf textarea{font-family:'Crimson Text',Georgia,serif;font-size:14px;background:transparent;border:none;border-bottom:1px solid var(--ink);padding:2px 4px;color:var(--ink);outline:none;width:100%}
+.sf textarea{resize:vertical;border:1px solid var(--parchment-border);border-radius:2px;padding:6px 8px;min-height:52px;background:rgba(255,255,255,.3)}
+
+.attr-row{display:flex;gap:10px;justify-content:center;margin:14px 0}
+.attr-box{text-align:center;background:var(--parchment-dark);border:1px solid var(--parchment-border);border-radius:3px;padding:8px 12px;min-width:80px}
+.attr-box label{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--ash);display:block;margin-bottom:4px}
+.attr-box input{font-family:'Cinzel',serif;font-size:24px;font-weight:700;color:var(--blood);background:none;border:none;width:50px;text-align:center;outline:none}
+
+/* FOLEGO TRACKER */
+.folego-section{background:var(--parchment-dark);border:1px solid var(--parchment-border);border-radius:3px;padding:12px 16px;margin:14px 0;text-align:center}
+.folego-label{font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--ash);margin-bottom:8px}
+.folego-controls{display:flex;align-items:center;gap:16px;justify-content:center;flex-wrap:wrap}
+.folego-pips{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.pip{width:32px;height:32px;border:2px solid var(--parchment-border);border-radius:3px;background:var(--parchment);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--forest);transition:all .15s;user-select:none}
+.pip.used{background:#3d1010;border-color:#5a1a1a;color:#5a1a1a}
+.folego-max-ctrl{display:flex;align-items:center;gap:6px}
+.folego-max-ctrl label{font-family:'Cinzel',serif;font-size:10px;letter-spacing:1px;color:var(--ash)}
+.folego-max-ctrl input{width:36px;font-family:'Cinzel',serif;font-size:14px;text-align:center;background:var(--parchment);border:1px solid var(--parchment-border);border-radius:2px;padding:2px 4px;color:var(--blood)}
+.folego-status{font-family:'Cinzel',serif;font-size:11px;color:var(--ash);margin-top:6px;font-style:italic}
+
+/* ESTADOS TRACKER */
+.estado-track{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:10px 0}
+.estado-btn{font-family:'Cinzel',serif;font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:6px 14px;border-radius:2px;border:2px solid transparent;cursor:pointer;transition:all .2s;background:var(--parchment)}
+.estado-btn.inteiro{border-color:#b5cfa0;color:var(--forest)}
+.estado-btn.arranhado{border-color:#c9a96e;color:#7a5c10}
+.estado-btn.ferido{border-color:#d49090;color:#7a1010}
+.estado-btn.critico{border-color:#7a1010;color:#f5c0c0;background:#3d1010}
+.estado-btn.sel{opacity:1;transform:scale(1.05)}
+.estado-btn:not(.sel){opacity:.4}
+
+/* SILHUETA DO PERSONAGEM */
+.equip-layout{display:grid;grid-template-columns:1fr 200px 1fr;gap:16px;margin:16px 0;align-items:start}
+.equip-side{display:flex;flex-direction:column;gap:8px}
+.equip-center{display:flex;flex-direction:column;gap:8px;align-items:center}
+.silhouette-container{width:160px;height:260px;position:relative;margin:0 auto}
+.silhouette-svg{width:100%;height:100%}
+
+.slot-drop{
+  background:var(--parchment-dark);border:1px dashed var(--parchment-border);
+  border-radius:3px;padding:8px 10px;min-height:52px;cursor:pointer;
+  transition:all .2s;text-align:center;position:relative;
+}
+.slot-drop:hover{border-style:solid;border-color:var(--gold);background:#fdf6e3}
+.slot-drop.has-item{border-style:solid;border-color:var(--parchment-border);background:var(--parchment)}
+.slot-label{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--ash);margin-bottom:3px;display:block}
+.slot-item-name{font-family:'Cinzel',serif;font-size:11px;color:var(--blood);font-weight:600}
+.slot-item-stat{font-size:11px;color:var(--forest)}
+.slot-empty-hint{font-size:11px;color:#b89050;font-style:italic}
+.slot-remove{position:absolute;top:2px;right:4px;font-size:12px;color:var(--ash);cursor:pointer;background:none;border:none;display:none;line-height:1}
+.slot-drop.has-item .slot-remove{display:block}
+
+/* TRANQUEIRAS */
+.trinket-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0}
+.trinket-slot{background:var(--parchment-dark);border:1px dashed var(--parchment-border);border-radius:3px;padding:8px;min-height:58px;cursor:pointer;text-align:center;transition:all .2s}
+.trinket-slot:hover{border-style:solid;border-color:var(--gold);background:#fdf6e3}
+.trinket-slot.has-item{border-style:solid;border-color:var(--parchment-border);background:var(--parchment)}
+.tn{font-family:'Cinzel',serif;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--ash)}
+.ti{font-family:'Cinzel',serif;font-size:11px;color:var(--blood);font-weight:600;margin-top:2px}
+.ts{font-size:11px;color:var(--forest)}
+
+/* ITEM PICKER MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:1000;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal-box{background:var(--parchment);border:2px solid var(--parchment-border);border-radius:4px;max-width:600px;width:90%;max-height:80vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.modal-header{background:var(--parchment-dark);padding:14px 20px;border-bottom:1px solid var(--parchment-border);display:flex;align-items:center;justify-content:space-between}
+.modal-title{font-family:'Cinzel',serif;font-size:14px;font-weight:700;color:var(--blood)}
+.modal-close{font-family:'Cinzel',serif;font-size:18px;color:var(--ash);background:none;border:none;cursor:pointer;line-height:1}
+.modal-body{overflow-y:auto;padding:14px 20px;flex:1}
+.modal-category{font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin:14px 0 8px;padding-bottom:4px;border-bottom:1px solid rgba(160,120,32,.3)}
+.item-list{display:flex;flex-direction:column;gap:6px}
+.item-option{background:var(--parchment-dark);border:1px solid var(--parchment-border);border-radius:3px;padding:10px 14px;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:space-between}
+.item-option:hover{border-color:var(--blood);background:#fdf6e3}
+.io-left{flex:1}
+.io-name{font-family:'Cinzel',serif;font-size:12px;font-weight:600;color:var(--blood)}
+.io-desc{font-size:12.5px;color:var(--ink-light);line-height:1.4}
+.io-right{text-align:right;flex-shrink:0;margin-left:10px}
+.io-stat{font-family:'Cinzel',serif;font-size:11px;color:var(--forest);font-weight:600}
+.io-folego{font-size:11px;color:#7a1010;font-family:'Cinzel',serif}
+
+/* HABILIDADES / INSTINTOS / TRAITS */
+.sheet-tags{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.sheet-tag{background:var(--parchment-dark);border:1px solid var(--parchment-border);border-radius:2px;padding:3px 10px;font-family:'Cinzel',serif;font-size:11px;color:var(--blood);display:flex;align-items:center;gap:4px}
+.sheet-tag .rt{cursor:pointer;color:var(--ash);font-size:13px}
+.add-tag-btn{background:none;border:1px dashed var(--parchment-border);border-radius:2px;padding:3px 10px;font-family:'Cinzel',serif;font-size:11px;color:var(--ash);cursor:pointer;transition:all .2s}
+.add-tag-btn:hover{border-color:var(--gold);color:var(--gold)}
+
+/* NOTAS */
+.notes-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+.note-block label{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--ash);display:block;margin-bottom:4px}
+.note-block textarea{width:100%;font-family:'Crimson Text',Georgia,serif;font-size:14px;background:rgba(255,255,255,.3);border:1px solid var(--parchment-border);border-radius:2px;padding:8px;color:var(--ink);resize:vertical;min-height:70px;outline:none}
+.note-block textarea:focus{border-color:var(--gold)}
+
+/* PRINT / FOOTER */
+.sheet-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:20px;padding-top:16px;border-top:1px solid var(--parchment-border)}
+.btn-print{font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;background:var(--blood);color:#f5edd8;border:none;padding:8px 20px;border-radius:2px;cursor:pointer;transition:all .2s}
+.btn-print:hover{background:#6a1010}
+.btn-clear{font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;background:none;color:var(--ash);border:1px solid var(--parchment-border);padding:8px 20px;border-radius:2px;cursor:pointer;transition:all .2s}
+.btn-clear:hover{border-color:var(--blood);color:var(--blood)}
+
+/* FOLEGO EFFECT */
+.folego-penalty{font-family:'Cinzel',serif;font-size:10px;color:var(--blood);letter-spacing:1px;text-align:center;margin-top:4px;min-height:16px}
+
+/* PAGE FOOTER */
+.page-footer{text-align:center;padding:18px;border-top:1px solid var(--parchment-border);font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:var(--ash);background:var(--parchment-dark)}
+
+@media print{
+  .main-nav,.sheet-actions,.modal-overlay{display:none!important}
+  .chapter{display:block!important}
+  body{background:white}
+  .page-wrap{box-shadow:none}
+}
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+<!-- ═══════════════════════ CAPA ═══════════════════════ -->
+<div class="book-cover" id="page-cover">
+  <span class="cover-claw">🐾</span>
+  <span class="cover-claw2">🦷</span>
+  <div class="cover-bg-ornament">🐺</div>
+  <div style="position:relative">
+    <div style="font-family:'Cinzel',serif;font-size:11px;letter-spacing:6px;color:#4a3520;text-transform:uppercase;margin-bottom:30px">Livro Oficial de Regras</div>
+    <div class="cover-sep"></div>
+    <div class="cover-main-title">Instintos da Caça</div>
+    <div class="cover-sep"></div>
+    <div class="cover-tagline">"Aqui não há heróis. Há sobreviventes.<br>E entre eles, os que caçam."</div>
+    <div class="cover-edition">Primeira Edição · Sistema Completo</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ NAV ═══════════════════════ -->
+<nav class="main-nav">
+  <div class="nav-sec">
+    <div class="nav-label">⚙ Regras</div>
+    <div class="nav-btns">
+      <button class="nb active" onclick="sc('intro')">Introdução</button>
+      <button class="nb" onclick="sc('regras')">Regras Básicas</button>
+      <button class="nb" onclick="sc('combate')">Combate</button>
+      <button class="nb" onclick="sc('folego')">Fôlego</button>
+      <button class="nb" onclick="sc('condicoes')">Condições</button>
+    </div>
+  </div>
+  <div class="nav-sec">
+    <div class="nav-label">🐾 Personagem</div>
+    <div class="nav-btns">
+      <button class="nb" onclick="sc('criacao')">Criação</button>
+      <button class="nb" onclick="sc('atributos')">Atributos</button>
+      <button class="nb" onclick="sc('traits')">Características</button>
+      <button class="nb" onclick="sc('instintos')">Instintos</button>
+      <button class="nb" onclick="sc('balanceamento')">Balanceamento</button>
+      <button class="nb" onclick="sc('animais')">Animais Prontos</button>
+    </div>
+  </div>
+  <div class="nav-sec">
+    <div class="nav-label">🎒 Mundo</div>
+    <div class="nav-btns">
+      <button class="nb" onclick="sc('equip')">Equipamentos</button>
+      <button class="nb" onclick="sc('exemplos')">Exemplos</button>
+      <button class="nb" onclick="sc('mestre')">Dicas do Mestre</button>
+      <button class="nb" onclick="sc('ficha')" style="color:#c9a030">📜 Ficha</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════ INTRODUÇÃO ═══════════════════════ -->
+<div class="chapter active" id="ch-intro">
+  <div class="ch-header">
+    <div class="ch-num">Prólogo</div>
+    <div class="ch-title">O Mundo Não Espera por Você</div>
+    <div class="ch-epigraph">"Antes de ser predador, você foi presa. Esse medo nunca some. Ele apenas muda de forma."</div>
+  </div>
+  <p class="drop-cap">Existe um momento entre a sombra e o movimento — um instante suspenso em que o mundo inteiro prende a respiração. É o momento antes da caçada. Antes dos músculos se contraírem, antes dos dentes se cravarem, antes de tudo. Nesse momento, não há pensamento. Há apenas instinto.</p>
+  <p><em>Instintos da Caça</em> é um sistema de interpretação de personagens onde você assume a pele, as garras e a perspectiva de criaturas que vivem e morrem pela lei mais antiga do mundo: sobreviva ou seja consumido.</p>
+  <p>Os jogadores interpretam animais — ou criaturas com comportamento animal — imersos em ambientes hostis onde cada decisão tem peso, cada recurso é precioso e a cooperação entre a matilha pode ser a diferença entre a vida e a morte.</p>
+  <h2>O Conceito</h2>
+  <p>Aqui não há magos lançando feitiços dos confins de uma torre. Não há paladinos cobertos de aço reluzente. O que existe é a floresta densa e impenetrável, a planície varrida pelo vento frio, o pântano que engole quem não presta atenção. E dentro desse mundo: você.</p>
+  <p>Seu personagem pensa, sente e age como uma criatura moldada por milênios de evolução. Ele teme. Ele deseja. Ele protege. Ele caça. Mas acima de tudo, ele <em>sobrevive.</em></p>
+  <h2>O Que Você Precisa</h2>
+  <div class="greenbox"><div class="rl">Materiais</div><strong>2 dados de seis faces (2d6)</strong> por jogador · Fichas de personagem · Marcadores para condições · Papel, lápis e vontade de sobreviver</div>
+  <h2>Os Três Pilares</h2>
+  <div class="attr-grid">
+    <div class="attr-card"><div class="attr-name">🩸 Tensão Constante</div><div class="attr-desc">O ambiente nunca é seguro. Cada momento de trégua é uma preparação para o próximo perigo. Os jogadores devem sentir o peso de cada escolha.</div></div>
+    <div class="attr-card"><div class="attr-name">🌿 Cooperação Estratégica</div><div class="attr-desc">Nenhuma criatura sobrevive sozinha. O sistema recompensa generosamente os jogadores que trabalham em conjunto, criando condições uns para os outros.</div></div>
+    <div class="attr-card"><div class="attr-name">🦷 Decisões que Custam</div><div class="attr-desc">Cada ação consome recursos. Não existe ação heroica gratuita. Quem gasta mais, arrisca mais. Quem calcula bem, dura mais.</div></div>
+    <div class="attr-card"><div class="attr-name">🎭 Identidade Animal</div><div class="attr-desc">Cada criatura tem um estilo de jogo único. O gato não luta como o urso. O lobo não pensa como a serpente. Suas mecânicas devem refletir o que você é.</div></div>
+  </div>
+  <hr class="orn">
+  <p style="text-align:center;font-style:italic;color:var(--ash)">A floresta não se importa com suas intenções. Apenas com seus atos.</p>
+</div>
+
+<!-- ═══════════════════════ REGRAS BÁSICAS ═══════════════════════ -->
+<div class="chapter" id="ch-regras">
+  <div class="ch-header">
+    <div class="ch-num">Capítulo I</div>
+    <div class="ch-title">As Leis da Floresta</div>
+    <div class="ch-epigraph">"Dois dados. Uma jogada. Uma consequência."</div>
+  </div>
+  <p class="drop-cap">Toda ação que importe — aquela em que o resultado realmente faz diferença — é resolvida com uma rolagem de dados. Pegue dois dados de seis faces, role-os juntos e some os resultados. O número diz o que acontece.</p>
+  <h2>A Rolagem Central: 2d6</h2>
+  <div class="dice-result">
+    <div class="dice-item s"><div class="dice-range">10 +</div><div class="dice-label">Sucesso Pleno — Você faz o que tentou, com precisão.</div></div>
+    <div class="dice-item p"><div class="dice-range">7 – 9</div><div class="dice-label">Sucesso Parcial — Você consegue, mas algo vai mal.</div></div>
+    <div class="dice-item f"><div class="dice-range">6 –</div><div class="dice-label">Falha com Consequência — O Mestre faz um movimento.</div></div>
+  </div>
+  <div class="rulebox"><div class="rl">Regra de Ouro</div>Falhas nunca são "nada acontece". O Mestre <em>sempre</em> avança a situação de alguma forma — o ambiente piora, um inimigo age, um recurso se perde, uma nova ameaça surge.</div>
+  <h2>Atributos e Modificadores</h2>
+  <p>Quando você rola, some um Atributo ao total. Atributos variam de <strong>-1</strong> (fraco) a <strong>+3</strong> (excepcional). Um resultado de 7 em 2d6 com +2 de Força equivale a 9 — um sucesso parcial.</p>
+  <h3>Vantagem e Desvantagem</h3>
+  <p>Certas condições ou habilidades te dão <strong>Vantagem</strong>: role 3d6 e descarte o menor. <strong>Desvantagem</strong> é o oposto — role 3d6 e descarte o maior.</p>
+  <div class="example-box"><div class="ex">Exemplo de Rolagem</div>Nara, a loba, tenta rastrear uma presa pela chuva. O Mestre pede uma rolagem de <strong>Mente</strong>. Nara tem Mente +1. Ela rola 2d6 e tira 5 e 3 = 8, mais 1 = 9. Sucesso Parcial: ela encontra o rastro, mas demora tanto que a tempestade piora e ela gasta 1 Fôlego extra.</div>
+  <h2>Quando Não Rolar</h2>
+  <p>Nem toda situação exige dados. Se não há risco real, se o personagem é claramente capaz, ou se o resultado não mudaria nada de significativo na cena — o Mestre simplesmente decide o resultado. Os dados existem para o momento em que <em>qualquer coisa pode acontecer.</em></p>
+  <h2>Movimentos do Mestre</h2>
+  <table>
+    <tr><th>Movimento</th><th>O que acontece</th></tr>
+    <tr><td>Separar a matilha</td><td>Um evento força os jogadores a se dividirem</td></tr>
+    <tr><td>Esgotar um recurso</td><td>Água, abrigo ou presa some do território</td></tr>
+    <tr><td>Revelar uma ameaça oculta</td><td>Um predador maior estava esperando</td></tr>
+    <tr><td>Piorar as condições</td><td>Tempestade, frio extremo, terreno traiçoeiro</td></tr>
+    <tr><td>Apresentar uma escolha difícil</td><td>Dois membros da matilha em perigo simultâneo</td></tr>
+  </table>
+</div>
+
+<!-- ═══════════════════════ COMBATE ═══════════════════════ -->
+<div class="chapter" id="ch-combate">
+  <div class="ch-header">
+    <div class="ch-num">Capítulo II</div>
+    <div class="ch-title">Quando o Sangue Corre</div>
+    <div class="ch-epigraph">"Combate não é guerra. É o momento em que cada segundo é um século."</div>
+  </div>
+  <p class="drop-cap">O combate em Instintos da Caça não é uma dança elegante de xadrez. É caótico, perigoso e intimamente físico. Um único encontro mal calculado pode colocar um personagem em estado Crítico — e isso por design. O sistema quer que você <em>pense</em> antes de atacar.</p>
+  <h2>Estrutura do Combate</h2>
+  <div class="combat-step"><div class="step-n">1</div><div class="step-body"><strong>Declare a Intenção:</strong> Antes de rolar qualquer dado, o jogador descreve o que sua criatura tenta fazer. A narrativa vem antes da mecânica.</div></div>
+  <div class="combat-step"><div class="step-n">2</div><div class="step-body"><strong>Role 2d6 + Atributo:</strong> Ataque usa Força ou Agilidade. Manobras táticas usam Mente. Intimidação usa Vontade.</div></div>
+  <div class="combat-step"><div class="step-n">3</div><div class="step-body"><strong>Interprete o Resultado:</strong> Sucesso, parcial ou falha — e as consequências chegam imediatamente.</div></div>
+  <div class="combat-step"><div class="step-n">4</div><div class="step-body"><strong>Reações do Alvo:</strong> Se o ataque foi bem-sucedido, o alvo pode reagir gastando Fôlego.</div></div>
+  <h2>Ataques e Dano</h2>
+  <table>
+    <tr><th>Resultado</th><th>Efeito no Alvo</th></tr>
+    <tr><td><strong>10+ (Sucesso)</strong></td><td>Causa dano: alvo avança um estado. Você aplica uma Condição.</td></tr>
+    <tr><td><strong>7–9 (Parcial)</strong></td><td>Causa dano, mas algo vai mal — expõe fraqueza, gasta Fôlego extra, ou alvo reage gratuitamente.</td></tr>
+    <tr><td><strong>6– (Falha)</strong></td><td>Sem dano. O Mestre faz um movimento.</td></tr>
+  </table>
+  <h2>Reações (custo: 1 Fôlego cada)</h2>
+  <div class="attr-grid">
+    <div class="attr-card"><div class="attr-name">Esquiva</div><div class="attr-desc">Role Agilidade. Com 10+, dano completamente evitado. Com 7–9, sem avanço de estado mas recebe Condição negativa.</div></div>
+    <div class="attr-card"><div class="attr-name">Contra-ataque</div><div class="attr-desc">Role Força. Com 10+, absorve e responde — ambos sofrem dano. Com 7–9, absorve mas perde Fôlego adicional.</div></div>
+    <div class="attr-card"><div class="attr-name">Reposicionamento</div><div class="attr-desc">Role Agilidade ou Mente. Com 10+, muda de posição e aplica "Observado" ao atacante.</div></div>
+    <div class="attr-card"><div class="attr-name">Resistência</div><div class="attr-desc">Role Vontade. Com 10+, ignora penalidades de estado por um turno. Com 7–9, por meio turno.</div></div>
+  </div>
+  <div class="rulebox"><div class="rl">Sem Fôlego, Sem Reação</div>Personagens sem Fôlego disponível não podem reagir. Eles tomam o dano sem possibilidade de mitigação.</div>
+  <h2>Estados de Saúde</h2>
+  <div class="estado-list">
+    <span class="estado ok">Inteiro</span><span class="estado arr">Arranhado</span><span class="estado feri">Ferido</span><span class="estado criti">Crítico</span>
+  </div>
+  <table>
+    <tr><th>Estado</th><th>Efeito Mecânico</th><th>Como Recuperar</th></tr>
+    <tr><td><strong>Inteiro</strong></td><td>Nenhum. Capacidade plena.</td><td>—</td></tr>
+    <tr><td><strong>Arranhado</strong></td><td>-1 Força e Agilidade.</td><td>Descanso curto ou cuidado da matilha.</td></tr>
+    <tr><td><strong>Ferido</strong></td><td>-2 Força/Agi; -1 Mente/Von. Fôlego máx. -2.</td><td>Descanso longo fora de perigo.</td></tr>
+    <tr><td><strong>Crítico</strong></td><td>Rolagem de sobrevivência a cada rodada. Sem ação ofensiva.</td><td>Ajuda imediata + descanso longo.</td></tr>
+  </table>
+  <div class="greenbox"><div class="rl">A Borda do Precipício</div>Quando em estado <strong>Crítico</strong> e recebe mais dano, rola 2d6. Com 6 ou menos, o personagem está fora de combate. A morte não é automática, mas a sobrevivência tem custo.</div>
+</div>
+
+<!-- ═══════════════════════ FÔLEGO ═══════════════════════ -->
+<div class="chapter" id="ch-folego">
+  <div class="ch-header">
+    <div class="ch-num">Capítulo III</div>
+    <div class="ch-title">O Ritmo da Sobrevivência</div>
+    <div class="ch-epigraph">"Quando o fôlego acaba, o instinto cede lugar ao desespero."</div>
+  </div>
+  <p class="drop-cap">Fôlego é o recurso mais fundamental de Instintos da Caça. Ele representa não apenas a energia física do personagem, mas sua capacidade de agir com precisão, tomar decisões rápidas e manter-se sob pressão.</p>
+  <h2>Gastando Fôlego</h2>
+  <table>
+    <tr><th>Ação</th><th>Custo</th></tr>
+    <tr><td>Usar habilidade de Instinto</td><td>1</td></tr>
+    <tr><td>Declarar uma Reação</td><td>1</td></tr>
+    <tr><td>Mover-se rapidamente (sprint)</td><td>1</td></tr>
+    <tr><td>Rolar com Vantagem (forçar)</td><td>1</td></tr>
+    <tr><td>Habilidade de Instinto poderosa</td><td>2</td></tr>
+    <tr><td>Ignorar penalidade de estado</td><td>2</td></tr>
+    <tr><td>Ação desesperada (fora de turno)</td><td>2</td></tr>
+  </table>
+  <h2>Recuperando Fôlego</h2>
+  <p><strong>Recuperação Curta</strong> (pausa no combate): recupera 1 Fôlego. <strong>Recuperação Longa</strong> (descanso real, água, abrigo seguro): recupera Fôlego total. Quando um membro da matilha <em>cuida ativamente</em> de outro: recupera 1 Fôlego imediatamente.</p>
+  <h2>Quando o Fôlego Acaba</h2>
+  <p>Com 0 Fôlego, entra em <strong>Exaustão</strong>:</p>
+  <ul style="margin:8px 0 16px 20px;line-height:2.2">
+    <li>Não pode usar Reações de nenhum tipo</li>
+    <li>Todas as rolagens sofrem -1</li>
+    <li>Não pode usar habilidades de Instinto</li>
+    <li>Qualquer dano sofrido avança dois estados ao invés de um</li>
+  </ul>
+  <div class="rulebox"><div class="rl">Fôlego e Equipamento</div>Cada peça de equipamento tem um custo de Fôlego associado. Equipamentos pesados reduzem o Fôlego máximo permanentemente enquanto equipados. Armas de duas mãos custam 1 Fôlego a mais em certas ações. Veja o capítulo de Equipamentos para detalhes completos.</div>
+</div>
+
+<!-- ═══════════════════════ CONDIÇÕES ═══════════════════════ -->
+<div class="chapter" id="ch-condicoes">
+  <div class="ch-header">
+    <div class="ch-num">Capítulo IV</div>
+    <div class="ch-title">Marcas na Presa</div>
+    <div class="ch-epigraph">"Você não precisa matar de uma vez. Primeiro, deixe-a saber que foi vista."</div>
+  </div>
+  <p class="drop-cap">Condições são o coração estratégico de Instintos da Caça. Quando uma criatura aplica uma condição a um inimigo, ela não apenas o enfraquece — ela cria uma abertura para toda a matilha explorar.</p>
+  <div class="goldbox"><div class="rl">O Ciclo</div>Criar → Explorar → Criar de Novo. Um personagem cria uma condição; outro explora; ao explorar, cria condições para o próximo. Grupos que descobrem esse ritmo tornam o combate fluido e devastadoramente eficiente.</div>
+  <div class="cond-full">
+    <div class="cond-card"><div class="cond-header"><span class="cond-icon">👁️</span><span class="cond-name">Observado</span></div><div class="cond-body">O alvo sabe que está sendo monitorado. Movimentos ficam tensos, previsíveis.</div><div class="cond-row"><strong>Explorar (1 Fôlego):</strong> próximo ataque com Vantagem; alvo não pode Esquivar.</div><div class="cond-row"><strong>Remover:</strong> gastar ação para se reposicionar.</div></div>
+    <div class="cond-card"><div class="cond-header"><span class="cond-icon">🐾</span><span class="cond-name">Caçado</span></div><div class="cond-body">O alvo percebe que é a presa desta situação. O medo começa a interferir.</div><div class="cond-row"><strong>Explorar (1 Fôlego):</strong> alvo rola próxima ação com Desvantagem.</div><div class="cond-row"><strong>Remover:</strong> sucesso pleno em Vontade (ação completa).</div></div>
+    <div class="cond-card"><div class="cond-header"><span class="cond-icon">💢</span><span class="cond-name">Exposto</span></div><div class="cond-body">Uma fraqueza física foi revelada — ponto cego, articulação descoberta, abertura.</div><div class="cond-row"><strong>Explorar (1 Fôlego):</strong> próximo dano avança 2 estados ao invés de 1.</div><div class="cond-row"><strong>Remover:</strong> mover-se para nova posição.</div></div>
+    <div class="cond-card"><div class="cond-header"><span class="cond-icon">💥</span><span class="cond-name">Caído</span></div><div class="cond-body">O alvo perdeu equilíbrio ou está em posição completamente desfavorável.</div><div class="cond-row"><strong>Explorar (1 Fôlego):</strong> ataque automático ao nível de Sucesso Parcial mínimo.</div><div class="cond-row"><strong>Remover:</strong> gastar ação para se levantar.</div></div>
+    <div class="cond-card"><div class="cond-header"><span class="cond-icon">😰</span><span class="cond-name">Acuado</span></div><div class="cond-body">Sem saída visível. O instinto de fuga domina, mas não há para onde ir.</div><div class="cond-row"><strong>Explorar (1 Fôlego):</strong> force o alvo a usar sua ação para fugir.</div><div class="cond-row"><strong>Remover:</strong> abrir saída real ou sucesso em Vontade.</div></div>
+    <div class="cond-card"><div class="cond-header"><span class="cond-icon">🩸</span><span class="cond-name">Sangrando</span></div><div class="cond-body">Uma ferida aberta drena e atrai. O cheiro de sangue muda a dinâmica.</div><div class="cond-row"><strong>Explorar (0 Fôlego):</strong> todos aliados têm +1 em ataques enquanto persistir.</div><div class="cond-row"><strong>Remover:</strong> descanso ou cuidado (ação completa).</div></div>
+    <div class="cond-card"><div class="cond-header"><span class="cond-icon">⚡</span><span class="cond-name">Desequilibrado</span></div><div class="cond-body">Posição comprometida, apoio instável.</div><div class="cond-row"><strong>Explorar (1 Fôlego):</strong> alvo não pode usar Reposicionamento como reação.</div><div class="cond-row"><strong>Remover:</strong> passar turno parado.</div></div>
+    <div class="cond-card"><div class="cond-header"><span class="cond-icon">😱</span><span class="cond-name">Aterrorizado</span></div><div class="cond-body">O medo ultrapassou o limiar. Instinto de fuga sequestrou o controle.</div><div class="cond-row"><strong>Explorar (1 Fôlego):</strong> alvo foge sem rolagem — você escolhe a direção.</div><div class="cond-row"><strong>Remover:</strong> sucesso em Vontade (dificuldade 10) como ação.</div></div>
+    <div class="cond-card"><div class="cond-icon">🌑</div><div class="cond-header" style="margin-top:-4px"><span class="cond-icon"></span><span class="cond-name">Cego</span></div><div class="cond-body">Visão bloqueada por poeira, água, posição ou dano ocular.</div><div class="cond-row"><strong>Explorar (1 Fôlego):</strong> próximo ataque é bem-sucedido sem rolagem.</div><div class="cond-row"><strong>Remover:</strong> turno parado ou ação específica.</div></div>
+    <div class="cond-card"><div class="cond-header"><span class="cond-icon">🔒</span><span class="cond-name">Imobilizado</span></div><div class="cond-body">Preso — por mandíbulas, peso, terreno. Sem movimento.</div><div class="cond-row"><strong>Explorar (0 Fôlego):</strong> qualquer ataque contra o alvo tem Vantagem. Não pode mover-se.</div><div class="cond-row"><strong>Remover:</strong> Força 10+ (ação completa) ou ajuda de aliado.</div></div>
+    <div class="cond-card"><div class="cond-header"><span class="cond-icon">🤢</span><span class="cond-name">Envenenado</span></div><div class="cond-body">Uma substância trabalha contra você de dentro. O corpo começa a falhar.</div><div class="cond-row"><strong>Efeito Passivo:</strong> -1 em todas as rolagens. A cada rodada, Fôlego máx. -1.</div><div class="cond-row"><strong>Remover:</strong> antídoto ou descanso longo.</div></div>
+    <div class="cond-card"><div class="cond-header"><span class="cond-icon">😵</span><span class="cond-name">Desorientado</span></div><div class="cond-body">O ambiente ou um golpe na cabeça embaralhou os sentidos.</div><div class="cond-row"><strong>Efeito:</strong> próxima ação escolhida aleatoriamente pelo Mestre (d6).</div><div class="cond-row"><strong>Remover:</strong> turno parado ou sucesso em Mente.</div></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ CRIAÇÃO ═══════════════════════ -->
+<div class="chapter" id="ch-criacao">
+  <div class="ch-header">
+    <div class="ch-num">Capítulo V</div>
+    <div class="ch-title">Carne, Osso e Instinto</div>
+    <div class="ch-epigraph">"Você não escolhe quem é. Você descobre isso quando a situação exige."</div>
+  </div>
+  <p class="drop-cap">Criar um personagem em Instintos da Caça é um ato de descoberta. Você não está preenchendo uma planilha — está dando vida a uma criatura com história, instintos e uma perspectiva de mundo que nenhuma outra terá.</p>
+  <h2>Os Cinco Passos</h2>
+  <div class="combat-step"><div class="step-n">1</div><div class="step-body"><strong>Escolha sua espécie e conceito.</strong> Decida que animal você é e qual é o seu papel instintivo. O conceito deve caber em uma frase: "Lobo que protege os mais fracos" ou "Gata que caça em silêncio absoluto".</div></div>
+  <div class="combat-step"><div class="step-n">2</div><div class="step-body"><strong>Distribua seus Atributos.</strong> Você tem os valores <strong>+2, +1, +1, 0</strong> para distribuir entre Força, Agilidade, Mente e Vontade.</div></div>
+  <div class="combat-step"><div class="step-n">3</div><div class="step-body"><strong>Escolha suas Características Animais.</strong> Você começa com <strong>3 Características</strong>. Elas definem a anatomia, o comportamento e as capacidades naturais do seu animal.</div></div>
+  <div class="combat-step"><div class="step-n">4</div><div class="step-body"><strong>Escolha seu Instinto.</strong> Selecione um Instinto base com 3 habilidades. Você começa com <strong>2 das 3</strong>. A terceira é desbloqueada por evolução narrativa.</div></div>
+  <div class="combat-step"><div class="step-n">5</div><div class="step-body"><strong>Equipamentos e Fôlego.</strong> Fôlego base é <strong>6</strong>, modificado pelas Características e equipamentos. Escolha seus itens (até 4 slots: cabeça, corpo, mãos, acessórios).</div></div>
+  <div class="goldbox"><div class="rl">Dica de Criação</div>Antes de escolher números, escreva três frases sobre sua criatura: <em>o que ela mais teme, o que ela mais deseja e o que ela jamais faria.</em> Esse exercício gera personagens com alma — e vai guiar suas escolhas mecânicas de forma orgânica.</div>
+  <h2>Evoluindo seu Personagem</h2>
+  <p>Ao fim de cada sessão significativa, o Mestre pode conceder um <strong>Marco de Evolução</strong>. Com um Marco, o jogador escolhe uma das seguintes opções:</p>
+  <ul style="margin:8px 0 16px 20px;line-height:2.2">
+    <li>Desbloquear a terceira habilidade do seu Instinto</li>
+    <li>Ganhar uma nova Característica Animal</li>
+    <li>Aumentar um Atributo em +1 (máximo +3)</li>
+    <li>Aprender um Instinto secundário (apenas uma habilidade de Instinto diferente)</li>
+  </ul>
+  <div class="rulebox"><div class="rl">Limites de Evolução</div>Nenhum Atributo pode ultrapassar +3. Nenhum personagem pode ter mais de 5 Características Animais. Os limites existem para garantir que as decisões táticas ainda importem.</div>
+</div>
+
+<!-- ═══════════════════════ ATRIBUTOS ═══════════════════════ -->
+<div class="chapter" id="ch-atributos">
+  <div class="ch-header">
+    <div class="ch-num">Capítulo VI</div>
+    <div class="ch-title">Os Quatro Pilares</div>
+    <div class="ch-epigraph">"Cada animal é a soma de sua força, sua velocidade, sua percepção e sua determinação."</div>
+  </div>
+  <p class="drop-cap">Os quatro atributos descrevem o que uma criatura <em>é</em>, não o que ela sabe fazer. Eles são a base sobre a qual todas as rolagens são construídas — e a escolha de onde investir define o estilo de jogo de forma permanente.</p>
+  <div class="attr-grid">
+    <div class="attr-card"><div class="attr-name">🦷 Força</div><div class="attr-desc"><em>Poder bruto, resistência física, massa e capacidade de impacto.</em> Usada em ataques diretos, empurrões, arrombamentos e para resistir a dano físico. Animais com Força alta travam o combate — eles não esquivam, eles absorvem e respondem.</div></div>
+    <div class="attr-card"><div class="attr-name">🌿 Agilidade</div><div class="attr-desc"><em>Velocidade, reflexos, equilíbrio e precisão de movimento.</em> Usada em esquivas, perseguições, ataques furtivos e navegação em terreno difícil. Animais ágeis fluem pelo combate como água.</div></div>
+    <div class="attr-card"><div class="attr-name">🌙 Mente</div><div class="attr-desc"><em>Percepção, rastreamento, memória de território e leitura de comportamento.</em> Usada para sentir perigo, antecipar ações, aplicar condições estratégicas e explorar o ambiente.</div></div>
+    <div class="attr-card"><div class="attr-name">🔥 Vontade</div><div class="attr-desc"><em>Coragem, determinação, presença e influência.</em> Usada para intimidar, liderar, resistir ao medo e manter-se funcional sob pressão extrema. A Vontade é o que separa quem sobrevive de quem desiste.</div></div>
+  </div>
+  <h2>Distribuição e Sinergias</h2>
+  <table>
+    <tr><th>Conceito</th><th>Distribuição Sugerida</th><th>Papel</th></tr>
+    <tr><td>Predador Veloz</td><td>Agi +2, Men +1, For +1, Von 0</td><td>Dano rápido, criação de condições</td></tr>
+    <tr><td>Tanque/Guardião</td><td>For +2, Von +1, Men +1, Agi 0</td><td>Absorção de dano, proteção</td></tr>
+    <tr><td>Estrategista</td><td>Men +2, Von +1, Agi +1, For 0</td><td>Controle de campo, exploração</td></tr>
+    <tr><td>Intimidador</td><td>Von +2, For +1, Men +1, Agi 0</td><td>Suporte moral, debuffs</td></tr>
+    <tr><td>Assassino</td><td>Agi +2, Men +1, Von +1, For 0</td><td>Golpe único, furtividade</td></tr>
+  </table>
+</div>
+
+<!-- ═══════════════════════ CARACTERÍSTICAS ═══════════════════════ -->
+<div class="chapter" id="ch-traits">
+  <div class="ch-header">
+    <div class="ch-num">Capítulo VII</div>
+    <div class="ch-title">Características Animais</div>
+    <div class="ch-epigraph">"Nenhuma criatura é apenas um conjunto de números. Ela é o que é porque evoluiu para sobreviver de um jeito específico."</div>
+  </div>
+  <p class="drop-cap">Características Animais são os traços físicos, comportamentais e instintivos que tornam cada criatura única. Elas não são habilidades que você usa — são partes de você, sempre ativas. Um animal grande não escolhe ser grande. Ele simplesmente <em>é</em>.</p>
+  <div class="rulebox"><div class="rl">Regra de Seleção</div>Escolha <strong>3 Características</strong> na criação. Elas devem fazer sentido para a espécie — um peixe não tem Garras Retráteis, e um elefante não tem Corpo Compacto. O Mestre tem palavra final sobre coerência, mas deve ser generoso.</div>
+
+  <div class="trait-category">Porte</div>
+  <div class="trait-grid">
+    <div class="trait-card hl"><div class="trait-tag">Porte</div><div class="trait-name">Animal Grande</div><div class="trait-desc">Sua massa e tamanho impõem respeito e dificultam ser movido ou derrubado.</div><div class="trait-mod">+1 Força · −1 Fôlego máx. · Imune a "Caído" por empurrão</div></div>
+    <div class="trait-card"><div class="trait-tag">Porte</div><div class="trait-name">Animal Pequeno</div><div class="trait-desc">Seu tamanho reduzido facilita esquivas e passagens em espaços apertados.</div><div class="trait-mod">−1 Força · +1 Agilidade · Move-se através de inimigos sem custo</div></div>
+    <div class="trait-card"><div class="trait-tag">Porte</div><div class="trait-name">Corpo Compacto</div><div class="trait-desc">Proporção ideal para explosões de esforço físico repentino.</div><div class="trait-mod">+1 Fôlego máx. · Pode usar Força ou Agilidade em ataques de carga</div></div>
+    <div class="trait-card"><div class="trait-tag">Porte</div><div class="trait-name">Monstruoso</div><div class="trait-desc">Você é aterrorizante só de aparecer. Criaturas menores instintivamente recuam.</div><div class="trait-mod">+2 Força · −2 Fôlego máx. · Primeira entrada aplica "Acuado" a um inimigo</div></div>
+  </div>
+
+  <div class="trait-category">Comportamento</div>
+  <div class="trait-grid">
+    <div class="trait-card hl"><div class="trait-tag">Comportamento</div><div class="trait-name">Predador Nato</div><div class="trait-desc">Você foi feito para caçar. Ataques contra alvos enfraquecidos são mais precisos.</div><div class="trait-mod">+1 em ataques contra inimigos com qualquer condição ativa</div></div>
+    <div class="trait-card"><div class="trait-tag">Comportamento</div><div class="trait-name">Resistente</div><div class="trait-desc">Você absorve o que mataria outros. Uma vez por combate, rejeita um nível de dano.</div><div class="trait-mod">1× por combate: ignora avanço de estado de um único golpe</div></div>
+    <div class="trait-card"><div class="trait-tag">Comportamento</div><div class="trait-name">Territorial</div><div class="trait-desc">Em terreno que você marcou ou declara como seu, você luta com ferocidade diferente.</div><div class="trait-mod">+1 Força e +1 Agilidade ao defender um ponto específico</div></div>
+    <div class="trait-card"><div class="trait-tag">Comportamento</div><div class="trait-name">Furtivo</div><div class="trait-desc">Você se move sem ser percebido. O ambiente é seu aliado mais silencioso.</div><div class="trait-mod">Movimentos silenciosos com Vantagem · Inimigos não aplicam "Observado" sem rolagem</div></div>
+    <div class="trait-card"><div class="trait-tag">Comportamento</div><div class="trait-name">Caçador de Matilha</div><div class="trait-desc">Você pensa em termos de grupo. Sozinho é menos; junto é mais.</div><div class="trait-mod">Quando aliado agiu contra mesmo alvo nesta rodada: +1 em ataques</div></div>
+    <div class="trait-card"><div class="trait-tag">Comportamento</div><div class="trait-name">Solitário</div><div class="trait-desc">Você não precisa de ninguém — e isso, paradoxalmente, te torna mais perigoso.</div><div class="trait-mod">+1 Fôlego máx. · Sem aliados adjacentes: +1 em ataques</div></div>
+    <div class="trait-card"><div class="trait-tag">Comportamento</div><div class="trait-name">Oportunista</div><div class="trait-desc">Você não cria a situação ideal. Você a encontra antes de todo mundo.</div><div class="trait-mod">1× por combate: após aliado criar condição, age fora de turno para explorá-la (sem custo)</div></div>
+    <div class="trait-card"><div class="trait-tag">Comportamento</div><div class="trait-name">Persistente</div><div class="trait-desc">Você não para. Inimigos que lutaram contra você aprendem isso da pior forma.</div><div class="trait-mod">Ao entrar em Ferido: recupera 1 Fôlego. Ao entrar em Crítico: recupera 2.</div></div>
+  </div>
+
+  <div class="trait-category">Anatomia</div>
+  <div class="trait-grid">
+    <div class="trait-card hl"><div class="trait-tag">Anatomia</div><div class="trait-name">Garras Retráteis</div><div class="trait-desc">Guardadas quando não são necessárias; devastadoras quando são.</div><div class="trait-mod">Contra-ataques gratuitos 1× por combate · Ataques aplicam "Sangrando" em sucesso pleno</div></div>
+    <div class="trait-card"><div class="trait-tag">Anatomia</div><div class="trait-name">Carapaça</div><div class="trait-desc">Sua proteção natural absorve o que chega pela frente.</div><div class="trait-mod">Dano frontal: atacante rola com Desvantagem para afetar seu estado</div></div>
+    <div class="trait-card"><div class="trait-tag">Anatomia</div><div class="trait-name">Cauda Forte</div><div class="trait-desc">Seu apêndice traseiro é uma arma de equilíbrio e impacto.</div><div class="trait-mod">Aplica "Caído" com ataque de cauda (sem dano de estado) · 0 Fôlego, 1× por rodada</div></div>
+    <div class="trait-card"><div class="trait-tag">Anatomia</div><div class="trait-name">Presas Venenosas</div><div class="trait-desc">Seu veneno faz o trabalho depois que você já foi embora.</div><div class="trait-mod">Em sucesso parcial: ainda aplica "Envenenado"</div></div>
+    <div class="trait-card"><div class="trait-tag">Anatomia</div><div class="trait-name">Espinhos Dorsais</div><div class="trait-desc">Atacar você tem um custo. Alguns aprendem tarde demais.</div><div class="trait-mod">Qualquer inimigo que use Contra-ataque avança um estado, independente do resultado</div></div>
+    <div class="trait-card"><div class="trait-tag">Anatomia</div><div class="trait-name">Visão Noturna</div><div class="trait-desc">A escuridão não é um obstáculo. É uma vantagem.</div><div class="trait-mod">Em pouca luz: Vantagem em todos os ataques · Inimigos sem visão noturna: Desvantagem contra você</div></div>
+    <div class="trait-card"><div class="trait-tag">Anatomia</div><div class="trait-name">Olfato Apurado</div><div class="trait-desc">Você sente o que não vê. Medo, sangue, doença — tudo tem cheiro.</div><div class="trait-mod">Detecta inimigos ocultos sem rolagem · Nunca é surpreendido se tiver tempo para farejar</div></div>
+    <div class="trait-card"><div class="trait-tag">Anatomia</div><div class="trait-name">Pelagem Camuflada</div><div class="trait-desc">Imóvel, você desaparece. Em movimento, você flui.</div><div class="trait-mod">Parado por um turno: impossível de atacar à distância · Movimento revela você</div></div>
+  </div>
+
+  <div class="trait-category">Estilo de Caça / Sobrevivência</div>
+  <div class="trait-grid">
+    <div class="trait-card hl"><div class="trait-tag">Caça</div><div class="trait-name">Emboscador</div><div class="trait-desc">O primeiro golpe é o que importa. Tudo o mais é recuperação.</div><div class="trait-mod">Se não agiu neste combate: primeiro ataque com Vantagem e condição gratuita</div></div>
+    <div class="trait-card"><div class="trait-tag">Caça</div><div class="trait-name">Perseguidor</div><div class="trait-desc">A presa pode correr. Você tem mais fôlego para isso do que ela.</div><div class="trait-mod">Perseguições com Vantagem · Inimigos que recuam: -1 na rolagem de fuga</div></div>
+    <div class="trait-card"><div class="trait-tag">Caça</div><div class="trait-name">Carrinheiro</div><div class="trait-desc">Você espera que outros façam o trabalho. E então aproveita o momento certo.</div><div class="trait-mod">Explorar condição de aliado: Vantagem. Criar condição própria: normal.</div></div>
+    <div class="trait-card"><div class="trait-tag">Sobrevivência</div><div class="trait-name">Recuperação Rápida</div><div class="trait-desc">Seus tecidos se fecham mais rápido. Seu corpo resiste mais.</div><div class="trait-mod">Recuperações Curtas recuperam 2 Fôlego ao invés de 1</div></div>
+    <div class="trait-card"><div class="trait-tag">Sobrevivência</div><div class="trait-name">Pele de Ferro</div><div class="trait-desc">Você já passou por coisas que deveriam ter te matado.</div><div class="trait-mod">1× por sessão ao entrar em Crítico: role Vontade. Com 10+, permanece em Ferido.</div></div>
+    <div class="trait-card"><div class="trait-tag">Sobrevivência</div><div class="trait-name">Memória de Território</div><div class="trait-desc">Você conhece cada pedra, cada saída, cada armadilha desta terra.</div><div class="trait-mod">Em terreno familiar: +1 Mente em todas as rolagens · Imune a "Desorientado"</div></div>
+    <div class="trait-card"><div class="trait-tag">Sobrevivência</div><div class="trait-name">Instinto de Fuga</div><div class="trait-desc">Saber quando sair é tão importante quanto saber quando lutar.</div><div class="trait-mod">Retiradas nunca causam dano adicional · Rolagem de saída com Vantagem</div></div>
+    <div class="trait-card"><div class="trait-tag">Sobrevivência</div><div class="trait-name">Comunicação da Matilha</div><div class="trait-desc">Você transmite intenção sem palavras. Sua matilha entende.</div><div class="trait-mod">1× por rodada: indica inimigo com condição a aliado sem custo. Aliado: +1 próxima rolagem contra ele.</div></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ INSTINTOS ═══════════════════════ -->
+<div class="chapter" id="ch-instintos">
+  <div class="ch-header">
+    <div class="ch-num">Capítulo VIII</div>
+    <div class="ch-title">A Gramática dos Instintos</div>
+    <div class="ch-epigraph">"Um instinto não é aprendido. É lembrado."</div>
+  </div>
+  <p class="drop-cap">Instintos são as habilidades ativas de cada criatura — explosões de comportamento animal traduzidas em mecânica. Eles não são magia. São o que acontece quando um predador opera no seu limite absoluto.</p>
+  <h2>Estrutura de um Instinto</h2>
+  <div class="builder-grid">
+    <div class="builder-cell"><div class="bc-label">Nome</div><div class="bc-value">Identidade narrativa</div></div>
+    <div class="builder-cell"><div class="bc-label">Tipo</div><div class="bc-value">Ofensivo / Defensivo / Controle / Movimento / Suporte</div></div>
+    <div class="builder-cell"><div class="bc-label">Atributo</div><div class="bc-value">Qual atributo rola</div></div>
+    <div class="builder-cell"><div class="bc-label">Causa Dano?</div><div class="bc-value">Sim / Não / Condicional</div></div>
+    <div class="builder-cell"><div class="bc-label">Alvos</div><div class="bc-value">1 / Área / Matilha</div></div>
+    <div class="builder-cell"><div class="bc-label">Condição Aplica</div><div class="bc-value">Qual condição (se houver)</div></div>
+    <div class="builder-cell"><div class="bc-label">Duração</div><div class="bc-value">Turno / Combate / Remoção</div></div>
+    <div class="builder-cell"><div class="bc-label">Recarga</div><div class="bc-value">Livre / 1 turno / 1 combate / 1 sessão</div></div>
+    <div class="builder-cell"><div class="bc-label">Custo de Fôlego</div><div class="bc-value">0 a 3</div></div>
+  </div>
+  <h2>Instintos Disponíveis</h2>
+  <div class="if-wrap">
+    <div class="if-header"><div class="if-icon">🐺</div><div><div class="if-name">Instinto do Lobo — Caçador de Matilha</div><div class="if-type">Foco: Cooperação · Posicionamento · Pressão coletiva</div></div></div>
+    <div class="hab-item"><span class="hab-name">Cerco Coordenado</span><span class="hab-cost">1 Fôlego</span><div style="margin:4px 0"><span class="hab-tag">Ofensivo</span><span class="hab-tag">Agilidade</span></div><div class="hab-desc">Se aliado agiu contra o mesmo alvo nesta rodada, rola com Vantagem e aplica "Caçado" em sucesso.</div></div>
+    <div class="hab-item"><span class="hab-name">Uivo de Rally</span><span class="hab-cost">0 Fôlego</span><div style="margin:4px 0"><span class="hab-tag">Suporte</span><span class="hab-tag">Vontade</span></div><div class="hab-desc">1× por combate: todos os aliados recuperam 1 Fôlego e ficam imunes a medo até o fim da rodada.</div></div>
+    <div class="hab-item"><span class="hab-name">Flanqueador</span><span class="hab-cost">0 Fôlego</span><div style="margin:4px 0"><span class="hab-tag">Ofensivo</span><span class="hab-tag">Desbloqueável</span></div><div class="hab-desc">Atacar alvo engajado com aliado: resultado sobe um nível. Falha→Parcial, Parcial→Sucesso.</div></div>
+  </div>
+  <div class="if-wrap">
+    <div class="if-header"><div class="if-icon">🐆</div><div><div class="if-name">Instinto do Felino — Caçador Solitário</div><div class="if-type">Foco: Furtividade · Golpe único · Condições individuais</div></div></div>
+    <div class="hab-item"><span class="hab-name">Espera Silenciosa</span><span class="hab-cost">1 Fôlego</span><div style="margin:4px 0"><span class="hab-tag">Controle</span><span class="hab-tag">Agilidade</span></div><div class="hab-desc">Passa um turno sem agir. No seguinte, ataca com Vantagem e aplica "Exposto" em sucesso pleno.</div></div>
+    <div class="hab-item"><span class="hab-name">Bote Certeiro</span><span class="hab-cost">1 Fôlego</span><div style="margin:4px 0"><span class="hab-tag">Ofensivo</span><span class="hab-tag">Agilidade</span></div><div class="hab-desc">Alvo com qualquer condição ativa não pode reagir neste turno. Em sucesso pleno, avança 2 estados.</div></div>
+    <div class="hab-item"><span class="hab-name">Sombra em Movimento</span><span class="hab-cost">1 Fôlego</span><div style="margin:4px 0"><span class="hab-tag">Movimento</span><span class="hab-tag">Desbloqueável</span></div><div class="hab-desc">Reposiciona sem custo. Inimigos perdem linha de visão até sua próxima ação.</div></div>
+  </div>
+  <div class="if-wrap">
+    <div class="if-header"><div class="if-icon">🐻</div><div><div class="if-name">Instinto do Urso — Guardião da Matilha</div><div class="if-type">Foco: Proteção · Resistência · Controle de área</div></div></div>
+    <div class="hab-item"><span class="hab-name">Muralha de Carne</span><span class="hab-cost">0 Fôlego</span><div style="margin:4px 0"><span class="hab-tag">Defensivo</span><span class="hab-tag">Força</span></div><div class="hab-desc">Quando aliado adjacente é atacado: você intercepta. Role Força — em sucesso, dano vai para você sem penalidade adicional.</div></div>
+    <div class="hab-item"><span class="hab-name">Rugido Dominante</span><span class="hab-cost">2 Fôlego</span><div style="margin:4px 0"><span class="hab-tag">Controle</span><span class="hab-tag">Vontade</span></div><div class="hab-desc">Role Vontade. Com 10+: aplica "Acuado" a todos os inimigos. Eles devem atacar você no próximo turno. Com 7–9: apenas os mais fracos cedem.</div></div>
+    <div class="hab-item"><span class="hab-name">Territorialidade</span><span class="hab-cost">2 Fôlego</span><div style="margin:4px 0"><span class="hab-tag">Ofensivo</span><span class="hab-tag">Desbloqueável</span></div><div class="hab-desc">Em terreno marcado: ataques em sucesso pleno avançam 2 estados ao invés de 1.</div></div>
+  </div>
+  <div class="if-wrap">
+    <div class="if-header"><div class="if-icon">🦅</div><div><div class="if-name">Instinto da Rapina — Olho que Tudo Vê</div><div class="if-type">Foco: Reconhecimento · Condições · Suporte tático</div></div></div>
+    <div class="hab-item"><span class="hab-name">Visão Superior</span><span class="hab-cost">1 Fôlego</span><div style="margin:4px 0"><span class="hab-tag">Suporte</span><span class="hab-tag">Mente</span></div><div class="hab-desc">Com 10+: revela fraqueza de um inimigo. O Mestre declara qual condição é vulnerável nele. Aplicá-la custa 1 Fôlego a menos para todos.</div></div>
+    <div class="hab-item"><span class="hab-name">Mergulho Rasante</span><span class="hab-cost">1 Fôlego</span><div style="margin:4px 0"><span class="hab-tag">Movimento+Ofensivo</span><span class="hab-tag">Agilidade</span></div><div class="hab-desc">Requer posição elevada. Ataque com Vantagem: em sucesso pleno, causa dano e aplica "Caído". Após o ataque, reposiciona fora do alcance.</div></div>
+    <div class="hab-item"><span class="hab-name">Bússola Interna</span><span class="hab-cost">0 Fôlego</span><div style="margin:4px 0"><span class="hab-tag">Suporte</span><span class="hab-tag">Desbloqueável</span></div><div class="hab-desc">Jamais se perde em território familiar. A matilha rola com Vantagem em Mente para navegação quando você lidera.</div></div>
+  </div>
+  <div class="if-wrap">
+    <div class="if-header"><div class="if-icon">🐍</div><div><div class="if-name">Instinto da Serpente — Paciente e Mortal</div><div class="if-type">Foco: Condições debilitantes · Veneno · Manipulação tática</div></div></div>
+    <div class="hab-item"><span class="hab-name">Bote Preciso</span><span class="hab-cost">1 Fôlego</span><div style="margin:4px 0"><span class="hab-tag">Controle</span><span class="hab-tag">Agilidade</span></div><div class="hab-desc">Em ataque bem-sucedido: escolha entre causar dano normal OU aplicar duas condições sem causar dano de estado.</div></div>
+    <div class="hab-item"><span class="hab-name">Espiral Venenosa</span><span class="hab-cost">1 Fôlego</span><div style="margin:4px 0"><span class="hab-tag">Controle</span><span class="hab-tag">Mente</span></div><div class="hab-desc">Quando inimigo possui condição que você aplicou, ele rola com Desvantagem em todas as ações de Vontade perto de você.</div></div>
+    <div class="hab-item"><span class="hab-name">Muda de Pele</span><span class="hab-cost">0 Fôlego</span><div style="margin:4px 0"><span class="hab-tag">Defensivo</span><span class="hab-tag">Desbloqueável</span></div><div class="hab-desc">1× por sessão, ao ser reduzido a Crítico: recupera 2 Fôlego instantaneamente e remove uma condição negativa.</div></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ BALANCEAMENTO ═══════════════════════ -->
+<div class="chapter" id="ch-balanceamento">
+  <div class="ch-header">
+    <div class="ch-num">Capítulo IX</div>
+    <div class="ch-title">A Arte do Equilíbrio</div>
+    <div class="ch-epigraph">"Um instinto barato que pode ser usado sempre vale mais do que um devastador que aparece uma vez."</div>
+  </div>
+  <p class="drop-cap">Criar Instintos novos é uma das atividades mais criativas do jogo. Mas habilidades mal calibradas destroem a tensão que torna Instintos da Caça especial. Esta seção existe para que Mestres e jogadores possam criar com confiança.</p>
+  <h2>A Tabela de Custo</h2>
+  <div class="cost-row"><div class="cost-badge cb1">+0</div><div>Não causa dano, não aplica condição forte, afeta apenas você</div></div>
+  <div class="cost-row"><div class="cost-badge cb1">+1</div><div>Causa dano OU aplica condição simples (Observado, Caído, Exposto)</div></div>
+  <div class="cost-row"><div class="cost-badge cb1">+1</div><div>Beneficia um aliado moderadamente (recupera 1 Fôlego, remove condição)</div></div>
+  <div class="cost-row"><div class="cost-badge cb2">+1</div><div>Aplica condição forte (Caçado, Aterrorizado, Sangrando, Acuado)</div></div>
+  <div class="cost-row"><div class="cost-badge cb2">+1</div><div>Rola com Vantagem</div></div>
+  <div class="cost-row"><div class="cost-badge cb2">+1</div><div>Afeta 2 ou mais alvos</div></div>
+  <div class="cost-row"><div class="cost-badge cb2">+1</div><div>Nega a Reação do alvo</div></div>
+  <div class="cost-row"><div class="cost-badge cb3">+1</div><div>Afeta todos os inimigos em cena</div></div>
+  <div class="cost-row"><div class="cost-badge cb3">+1</div><div>Causa dano E aplica condição forte simultaneamente</div></div>
+  <div class="cost-row"><div class="cost-badge cb3">+1</div><div>Efeito dura mais de um turno sem ação de remoção</div></div>
+  <div class="rulebox"><div class="rl">Teto de Custo</div>Nenhum Instinto deve custar mais de <strong>3 Fôlego</strong>. Se a soma ultrapassar 3, divida-o em duas habilidades separadas ou reduza o escopo.</div>
+  <h2>Recarga e Impacto</h2>
+  <table>
+    <tr><th>Recarga</th><th>Impacto Esperado</th><th>Exemplo</th></tr>
+    <tr><td><strong>Livre</strong></td><td>Moderado — +1 ou condição simples</td><td>Dilaceração, Olhar da Presa</td></tr>
+    <tr><td><strong>1 turno</strong></td><td>Significativo — dano + condição, ou Vantagem</td><td>Carga de Ruptura, Enrijecer</td></tr>
+    <tr><td><strong>1 combate</strong></td><td>Alto — múltiplos alvos ou condição forte em área</td><td>Rugido Dominante, Uivo de Rally</td></tr>
+    <tr><td><strong>1 sessão</strong></td><td>Transformador — muda o estado do combate completamente</td><td>Muda de Pele, Pele de Ferro</td></tr>
+  </table>
+</div>
+
+<!-- ═══════════════════════ ANIMAIS PRONTOS ═══════════════════════ -->
+<div class="chapter" id="ch-animais">
+  <div class="ch-header">
+    <div class="ch-num">Capítulo X</div>
+    <div class="ch-title">Três Criaturas, Três Caminhos</div>
+    <div class="ch-epigraph">"Cada animal resolveu o problema da sobrevivência de forma diferente. Aprenda com eles."</div>
+  </div>
+  <p class="drop-cap">O que se segue são três personagens completos e prontos para jogar — ou para servir de modelo. Cada um representa um estilo de jogo radicalmente diferente. Nenhum é superior. Todos dependem da matilha.</p>
+
+  <div class="if-wrap">
+    <div class="if-header"><div class="if-icon">🐱</div><div><div class="if-name">O Gato — Assassino das Sombras</div><div class="if-type">Estilo: Controle de condições · Golpe único · Furtividade</div><div class="if-style">Ele não é a criatura mais forte. Mas é a que mata com mais precisão.</div></div></div>
+    <div class="if-stats"><div class="if-stat"><div class="if-stat-label">Força</div><div class="if-stat-val">0</div></div><div class="if-stat"><div class="if-stat-label">Agilidade</div><div class="if-stat-val">+2</div></div><div class="if-stat"><div class="if-stat-label">Mente</div><div class="if-stat-val">+1</div></div><div class="if-stat"><div class="if-stat-label">Vontade</div><div class="if-stat-val">+1</div></div></div>
+    <div class="profile-block"><div class="profile-item"><div class="pi-label">Fôlego</div><div class="pi-val">6</div></div><div class="profile-item"><div class="pi-label">Características</div><div class="pi-val">Garras Retráteis · Furtivo · Emboscador</div></div><div class="profile-item"><div class="pi-label">Pontos Fortes</div><div class="pi-val">Dano cirúrgico, condições rápidas, mobilidade</div></div><div class="profile-item"><div class="pi-label">Pontos Fracos</div><div class="pi-val">Frágil sob golpes diretos, sem proteção de aliados</div></div></div>
+    <div class="example-box" style="margin-top:10px"><div class="ex">Combo Perfeito</div>Turno 1: Espera Silenciosa (1 Fôlego). Turno 2: Bote Certeiro com Vantagem — alvo avança 2 estados, sem reagir (1 Fôlego). Turno 3: Sombra em Movimento para reposicionar (1 Fôlego). Total: 3 Fôlego. Resultado: alvo em Crítico, gato fora de alcance.</div>
+  </div>
+
+  <div class="if-wrap">
+    <div class="if-header"><div class="if-icon">🐺</div><div><div class="if-name">O Lobo — Lutador da Matilha</div><div class="if-type">Estilo: Cooperação · Pressão constante · Setup para aliados</div><div class="if-style">Sozinho, é perigoso. Com dois aliados, é catastrófico.</div></div></div>
+    <div class="if-stats"><div class="if-stat"><div class="if-stat-label">Força</div><div class="if-stat-val">+1</div></div><div class="if-stat"><div class="if-stat-label">Agilidade</div><div class="if-stat-val">+2</div></div><div class="if-stat"><div class="if-stat-label">Mente</div><div class="if-stat-val">+1</div></div><div class="if-stat"><div class="if-stat-label">Vontade</div><div class="if-stat-val">0</div></div></div>
+    <div class="profile-block"><div class="profile-item"><div class="pi-label">Fôlego</div><div class="pi-val">7 (Corpo Compacto)</div></div><div class="profile-item"><div class="pi-label">Características</div><div class="pi-val">Caçador de Matilha · Corpo Compacto · Oportunista</div></div><div class="profile-item"><div class="pi-label">Pontos Fortes</div><div class="pi-val">Consistência, cooperação, setup para aliados</div></div><div class="profile-item"><div class="pi-label">Pontos Fracos</div><div class="pi-val">Dependente de aliados para brilhar</div></div></div>
+  </div>
+
+  <div class="if-wrap">
+    <div class="if-header"><div class="if-icon">🦔</div><div><div class="if-name">O Tatu — Muralha Viva</div><div class="if-type">Estilo: Absorção de dano · Proteção · Controle de espaço</div><div class="if-style">Ele não mata rapidamente. Mas enquanto estiver de pé, você não chega nos outros.</div></div></div>
+    <div class="if-stats"><div class="if-stat"><div class="if-stat-label">Força</div><div class="if-stat-val">+2</div></div><div class="if-stat"><div class="if-stat-label">Agilidade</div><div class="if-stat-val">0</div></div><div class="if-stat"><div class="if-stat-label">Mente</div><div class="if-stat-val">+1</div></div><div class="if-stat"><div class="if-stat-label">Vontade</div><div class="if-stat-val">+1</div></div></div>
+    <div class="profile-block"><div class="profile-item"><div class="pi-label">Fôlego</div><div class="pi-val">6</div></div><div class="profile-item"><div class="pi-label">Características</div><div class="pi-val">Animal Grande · Carapaça · Resistente · Territorial</div></div><div class="profile-item"><div class="pi-label">Pontos Fortes</div><div class="pi-val">Absorção extrema, proteção de aliados</div></div><div class="profile-item"><div class="pi-label">Pontos Fracos</div><div class="pi-val">Lento, dano baixo, vulnerável por flancos</div></div></div>
+  </div>
+
+  <div class="greenbox" style="margin-top:24px"><div class="rl">Crie o Seu</div>Esses três animais cobrem três papéis fundamentais. Mas há espaço para tudo: o crocodilo que aplica Imobilizado; a águia que controla o campo de cima; o cervo que usa velocidade para proteger. O sistema foi feito para qualquer criatura. Dê a ela uma voz.</div>
+</div>
+
+<!-- ═══════════════════════ EQUIPAMENTOS ═══════════════════════ -->
+<div class="chapter" id="ch-equip">
+  <div class="ch-header">
+    <div class="ch-num">Capítulo XI</div>
+    <div class="ch-title">O Que Você Carrega</div>
+    <div class="ch-epigraph">"Cada item tem um peso. Não apenas no corpo — na estratégia."</div>
+  </div>
+  <p class="drop-cap">Criaturas não carregam bolsas de aventureiro. Mas elas modificam sua anatomia, território e comportamento com o que encontram e conquistam. Dentes aprimorados por hábitos, pele endurecida por cicatrizes, armadilhas que funcionam como extensões de território — tudo isso é equipamento.</p>
+
+  <h2>Os Quatro Slots</h2>
+  <div class="rulebox"><div class="rl">Sistema de Slots</div>Cada personagem possui <strong>4 slots principais</strong> — Cabeça, Corpo, Mão Esquerda e Mão Direita — mais <strong>8 slots de Tranqueiras</strong> (itens menores, consumíveis e utilitários). Os slots principais afetam diretamente o Fôlego máximo quando preenchidos com itens pesados.</div>
+
+  <h3>Como o Equipamento Afeta o Fôlego</h3>
+  <table>
+    <tr><th>Peso do Item</th><th>Fôlego Máximo</th><th>Custo em Ações</th></tr>
+    <tr><td>Leve (ossos, penas, ervas)</td><td>Sem penalidade</td><td>Normal</td></tr>
+    <tr><td>Médio (couro, resinas, pedra)</td><td>−1 Fôlego máx.</td><td>Normal</td></tr>
+    <tr><td>Pesado (chifres, carapaça, metal)</td><td>−2 Fôlego máx.</td><td>Certas ações custam +1 Fôlego</td></tr>
+  </table>
+
+  <h2>Slot: Cabeça</h2>
+  <div class="equip-grid">
+    <div class="equip-card"><div class="eq-head"><span class="eq-icon">🦴</span><div><div class="eq-name">Máscara de Ossos</div><div class="eq-slot">Cabeça · Médio</div></div></div><div class="eq-desc">Crânio de predador antigo usado como cobertura facial. Intimidante e assustador.</div><div class="eq-stat">+1 Vontade em confrontos de intimidação</div><br><span class="eq-folego">Fôlego Máx. −1</span></div>
+    <div class="equip-card"><div class="eq-head"><span class="eq-icon">🌿</span><div><div class="eq-name">Coroa de Espinhos</div><div class="eq-slot">Cabeça · Leve</div></div></div><div class="eq-desc">Ramos e espinhos entrelaçados. Qualquer inimigo que acerte você na cabeça recebe dano de retorno.</div><div class="eq-stat">Dano de retorno ao atacante em acerto crítico na cabeça</div><br><span class="eq-folego n">Sem penalidade</span></div>
+    <div class="equip-card"><div class="eq-head"><span class="eq-icon">🪨</span><div><div class="eq-name">Elmo de Pedra</div><div class="eq-slot">Cabeça · Pesado</div></div></div><div class="eq-desc">Bloco de rocha moldado. Quase impossível de desorientar ou cegar quem o usa.</div><div class="eq-stat">Imune a "Desorientado" e "Cego" por impacto físico</div><br><span class="eq-folego">Fôlego Máx. −2</span></div>
+    <div class="equip-card"><div class="eq-head"><span class="eq-icon">🌺</span><div><div class="eq-name">Pigmentos de Camuflagem</div><div class="eq-slot">Cabeça · Leve</div></div></div><div class="eq-desc">Tintas naturais que quebram seu perfil visual. Mais difícil de ser rastreado.</div><div class="eq-stat">Inimigos rolam com Desvantagem para aplicar "Observado"</div><br><span class="eq-folego n">Sem penalidade</span></div>
+  </div>
+
+  <h2>Slot: Corpo</h2>
+  <div class="equip-grid">
+    <div class="equip-card"><div class="eq-head"><span class="eq-icon">🛡️</span><div><div class="eq-name">Couro de Predador</div><div class="eq-slot">Corpo · Médio</div></div></div><div class="eq-desc">Pele curtida de um animal caçado por você. Proteção que conta uma história.</div><div class="eq-stat">Reações de Esquiva custam 0 Fôlego 1× por combate</div><br><span class="eq-folego">Fôlego Máx. −1</span></div>
+    <div class="equip-card"><div class="eq-head"><span class="eq-icon">🦎</span><div><div class="eq-name">Escamas Sobrepostas</div><div class="eq-slot">Corpo · Pesado</div></div></div><div class="eq-desc">Camadas de escamas costuradas. Movimentos mais lentos, mas golpes físicos frontais têm efeito reduzido.</div><div class="eq-stat">-1 Agilidade · Dano frontal: atacante rola com Desvantagem</div><br><span class="eq-folego">Fôlego Máx. −2</span></div>
+    <div class="equip-card"><div class="eq-head"><span class="eq-icon">🌾</span><div><div class="eq-name">Manto de Folhagem</div><div class="eq-slot">Corpo · Leve</div></div></div><div class="eq-desc">Folhas e galhos presos ao corpo. Camuflagem natural em ambientes florestais.</div><div class="eq-stat">Em floresta ou mato: +1 Agilidade em movimentos furtivos</div><br><span class="eq-folego n">Sem penalidade</span></div>
+    <div class="equip-card"><div class="eq-head"><span class="eq-icon">💀</span><div><div class="eq-name">Armadura de Ossos</div><div class="eq-slot">Corpo · Pesado</div></div></div><div class="eq-desc">Ossos de criaturas abatidas formam uma armadura irregular mas resistente. Assustadora de contemplar.</div><div class="eq-stat">Aplica "Acuado" ao primeiro inimigo que te atacar em cada combate</div><br><span class="eq-folego">Fôlego Máx. −2</span></div>
+  </div>
+
+  <h2>Armas — Mão Direita e Esquerda</h2>
+  <div class="rulebox"><div class="rl">Armas de Uma Mão vs Duas Mãos</div><strong>Armas de 1 mão</strong>: usadas com uma mão. A outra fica livre para escudo, segundo item ou Contra-ataques mais fáceis. <strong>Armas de 2 mãos</strong>: ocupam as duas mãos. Causam mais dano e têm efeitos únicos, mas Reações de Esquiva custam +1 Fôlego extra e você não pode usar escudo.</div>
+
+  <h3>Armas de Uma Mão</h3>
+  <div class="equip-grid">
+    <div class="equip-card"><div class="eq-head"><span class="eq-icon">🪝</span><div><div class="eq-name">Garra de Pedra Lascada</div><div class="eq-slot">1 Mão · Leve</div></div></div><div class="weapon-type wt-1m">1 Mão</div><div class="eq-desc">Lasca afiada de pedra amarrada à pata. Básica, leve e confiável.</div><div class="eq-stat">Sucesso: aplica "Sangrando" automaticamente</div><br><span class="eq-folego n">Sem penalidade de Fôlego</span></div>
+    <div class="equip-card"><div class="eq-head"><span class="eq-icon">🦷</span><div><div class="eq-name">Dente Envenenado</div><div class="eq-slot">1 Mão · Leve</div></div></div><div class="weapon-type wt-1m">1 Mão</div><div class="eq-desc">Dente de serpente montado em cabo ósseo. Dano menor, mas o veneno compensa.</div><div class="eq-stat">Sucesso parcial: ainda aplica "Envenenado". Sucesso pleno: dano + "Envenenado"</div><br><span class="eq-folego n">Sem penalidade</span></div>
+    <div class="equip-card"><div class="eq-head"><span class="eq-icon">🪃</span><div><div class="eq-name">Osso Curvo</div><div class="eq-slot">1 Mão · Médio</div></div></div><div class="weapon-type wt-1m">1 Mão</div><div class="eq-desc">Osso de pata grande, curvado e afiado. Versátil para ataque e Contra-ataque.</div><div class="eq-stat">Contra-ataques com esta arma: +1 na rolagem</div><br><span class="eq-folego z">Sem penalidade de Fôlego</span></div>
+    <div class="equip-card"><div class="eq-head"><span class="eq-icon">🐚</span><div><div class="eq-name">Concha Afiada</div><div class="eq-slot">1 Mão · Leve</div></div></div><div class="weapon-type wt-1m">1 Mão</div><div class="eq-desc">Concha de molusco gigante, sua borda é uma lâmina natural. Aplica condição rápida.</div><div class="eq-stat">Sucesso: escolha entre dano OU aplicar "Desequilibrado"</div><br><span class="eq-folego n">Sem penalidade</span></div>
+  </div>
+
+  <h3>Armas de Duas Mãos</h3>
+  <div class="equip-grid">
+    <div class="equip-card"><div class="eq-head"><span class="eq-icon">🦌</span><div><div class="eq-name">Chifres de Veado Empalhado</div><div class="eq-slot">2 Mãos · Pesado</div></div></div><div class="weapon-type wt-2m">2 Mãos</div><div class="eq-desc">Galhada completa amarrada às costas ou cabeça. Impacto brutal e amplo.</div><div class="eq-stat">Sucesso pleno: dano + "Caído". Atinge até 2 alvos adjacentes</div><br><span class="eq-folego">Esquiva custa +1 Fôlego · Fôlego Máx. −1</span></div>
+    <div class="equip-card"><div class="eq-head"><span class="eq-icon">🌵</span><div><div class="eq-name">Lança de Espinho Gigante</div><div class="eq-slot">2 Mãos · Médio</div></div></div><div class="weapon-type wt-2m">2 Mãos</div><div class="eq-desc">Espinho de cacto ou peixe-espada preso em haste longa. Alcance maior que qualquer arma de 1 mão.</div><div class="eq-stat">Ataca inimigos a distância curta sem se aproximar. Primeiro ataque do combate: Vantagem</div><br><span class="eq-folego">Esquiva custa +1 Fôlego</span></div>
+    <div class="equip-card"><div class="eq-head"><span class="eq-icon">🪵</span><div><div class="eq-name">Mandíbula de Crocodilo</div><div class="eq-slot">2 Mãos · Pesado</div></div></div><div class="weapon-type wt-2m">2 Mãos</div><div class="eq-desc">A mandíbula inteira de um crocodilo adulto. Quem for mordido, fica preso.</div><div class="eq-stat">Sucesso pleno: dano + "Imobilizado". Para soltar: ação completa ou gasta 2 Fôlego</div><br><span class="eq-folego">Esquiva custa +1 Fôlego · Fôlego Máx. −2</span></div>
+    <div class="equip-card"><div class="eq-head"><span class="eq-icon">🔱</span><div><div class="eq-name">Garras Duplas de Águia</div><div class="eq-slot">2 Mãos · Médio</div></div></div><div class="weapon-type wt-2m">2 Mãos</div><div class="eq-desc">Par de garras gigantes de rapina. Ataque duplo — dois golpes consecutivos na mesma ação.</div><div class="eq-stat">Ataque duplo: rola 2 vezes. Segundo ataque tem -1. Cada sucesso aplica efeito separado</div><br><span class="eq-folego">Esquiva custa +1 Fôlego</span></div>
+  </div>
+
+  <h3>Escudos e Parry (Mão Livre)</h3>
+  <div class="equip-grid">
+    <div class="equip-card"><div class="eq-head"><span class="eq-icon">🐢</span><div><div class="eq-name">Carapaça de Tartaruga</div><div class="eq-slot">1 Mão (Escudo) · Médio</div></div></div><div class="weapon-type wt-sp">Escudo</div><div class="eq-desc">Carapaça de tartaruga gigante usada como escudo. Defesa sólida e confiável.</div><div class="eq-stat">Reações de Esquiva custam 0 Fôlego 1× por rodada</div><br><span class="eq-folego">Fôlego Máx. −1</span></div>
+    <div class="equip-card"><div class="eq-head"><span class="eq-icon">🌳</span><div><div class="eq-name">Tronco de Madeira</div><div class="eq-slot">1 Mão (Escudo) · Pesado</div></div></div><div class="weapon-type wt-sp">Escudo</div><div class="eq-desc">Pedaço de tronco resistente. Pesado demais para esquivar — mas bom para empurrar.</div><div class="eq-stat">Pode usar como arma 1 mão (dano + "Desequilibrado"). Bloqueia sem rolagem 1× por combate</div><br><span class="eq-folego">Fôlego Máx. −2 · Agilidade −1</span></div>
+  </div>
+
+  <h2>Slots de Tranqueiras (8 slots)</h2>
+  <p>Tranqueiras são itens menores — consumíveis, ferramentas, venenos e utilitários. Elas não afetam o Fôlego máximo, mas têm usos limitados. Cada slot carrega um item.</p>
+  <table>
+    <tr><th>Item</th><th>Usos</th><th>Efeito</th></tr>
+    <tr><td>🌿 Erva Medicinal</td><td>1 por descanso</td><td>Remove um estado de dano (Arranhado ou Ferido)</td></tr>
+    <tr><td>🍄 Fungo Estimulante</td><td>1 por sessão</td><td>Recupera 2 Fôlego imediatamente</td></tr>
+    <tr><td>🐝 Ferrão de Vespa</td><td>3 cargas</td><td>Aplica "Envenenado" em qualquer ataque bem-sucedido (1 carga por uso)</td></tr>
+    <tr><td>🌊 Água do Rio</td><td>1 uso</td><td>Remove "Envenenado" ou "Sangrando"</td></tr>
+    <tr><td>🪤 Armadilha de Galhos</td><td>1 uso</td><td>Preparada antes do combate. Aplica "Caído" ao primeiro inimigo que passar</td></tr>
+    <tr><td>🌶 Pó Irritante</td><td>2 usos</td><td>Lançado: aplica "Cego" a um alvo por 1 turno</td></tr>
+    <tr><td>🦟 Resina Grudenta</td><td>1 uso</td><td>Aplica "Imobilizado" por 1 turno a um alvo (requer contato)</td></tr>
+    <tr><td>🔥 Musgo Inflamável</td><td>1 uso</td><td>Cria área de fogo em zona pequena. Inimigos na área: -1 em ações e recebem dano por turno</td></tr>
+    <tr><td>🎯 Pedra de Arremesso (×5)</td><td>5 usos</td><td>Ataque à distância. Sucesso parcial: sem dano mas aplica "Desequilibrado"</td></tr>
+    <tr><td>📯 Osso Sônico</td><td>1 por combate</td><td>Som agudo: todos em cena com olfato apurado ficam "Desorientados" por 1 turno</td></tr>
+    <tr><td>🕸 Fio de Teia</td><td>3 usos</td><td>Restringe movimento. Alvo: -1 Agilidade e "Desequilibrado" até remover</td></tr>
+    <tr><td>🌰 Fruto Amargo</td><td>1 uso</td><td>Consumido: recupera 1 estado de dano. Efeito lento — funciona apenas fora do combate</td></tr>
+  </table>
+
+  <div class="goldbox"><div class="rl">Equipamentos como Narrativa</div>Todo equipamento deve ter uma explicação no mundo. Não são itens que aparecem do nada — sua criatura os encontrou, conquistou ou desenvolveu. Trabalhe com o Mestre para que cada item faça sentido para a espécie e a história do personagem.</div>
+</div>
+
+<!-- ═══════════════════════ EXEMPLOS ═══════════════════════ -->
+<div class="chapter" id="ch-exemplos">
+  <div class="ch-header">
+    <div class="ch-num">Capítulo XII</div>
+    <div class="ch-title">A Caçada em Movimento</div>
+    <div class="ch-epigraph">"Às vezes, o melhor jeito de entender é ver acontecer."</div>
+  </div>
+  <p class="drop-cap">O que você vai ler a seguir é uma sequência de combate real, jogada com três personagens. Note como o sistema de condições cria um ritmo de cooperação, como o Fôlego força escolhas e como as reações mudam o fluxo a cada turno.</p>
+  <div class="goldbox"><div class="rl">Os Personagens</div><strong>Nara</strong> — Loba, Instinto do Lobo (Agilidade +2, Mente +1)<br><strong>Tero</strong> — Urso pardo, Instinto do Urso (Força +2, Vontade +1)<br><strong>Kael</strong> — Lince, Instinto do Felino (Agilidade +2, Mente +1)<br><br><strong>Inimigo:</strong> Javali adulto, irritado, 6 Fôlego, estado Inteiro.</div>
+  <h2>Turno 1 — A Abertura</h2>
+  <div class="example-box" style="font-style:normal"><div class="ex">Narração</div><p style="font-style:italic;margin-bottom:10px">"O javali para no centro do riacho lamacento. Suas presas estão manchadas de terra e de algo mais escuro."</p><p><strong>Kael:</strong> "Espera Silenciosa — gasto 1 Fôlego."</p><p><strong>Nara:</strong> Rola Agilidade: 4+5=9, +2 = 11. <strong>Sucesso Pleno.</strong> Circula pelo flanco — aplica <strong>"Observado"</strong>.</p><p><strong>Tero:</strong> Rola Vontade: 3+3=6, +1 = 7. <strong>Sucesso Parcial.</strong> Avança com presença, o javali recua meio passo — mas Tero fica exposto.</p></div>
+  <h2>Turno 2 — O Setup Explode</h2>
+  <div class="example-box" style="font-style:normal"><div class="ex">Narração</div><p><strong>Kael explora "Observado"</strong> — gasta 1 Fôlego. Usa Bote Certeiro (alvo não pode reagir). Rola com Vantagem: 5, 4, 6 → usa 5+6=11. +2 Agi = <strong>13. Sucesso Pleno.</strong></p><p style="font-style:italic">"Kael cai do galho como um raio. Garras no pescoço. Javali: Inteiro → <strong>Arranhado</strong>. Aplica <strong>'Sangrando'</strong>."</p><p><strong>Nara</strong> (com +1 de Sangrando): Rola Agi: 3+4=7, +2+1 = 10. <strong>Sucesso Pleno.</strong> Javali tenta Contra-ataque: 2+2+1 = 5. Falha. Javali: <strong>Arranhado → Ferido</strong>. Aplica <strong>"Caçado"</strong>.</p></div>
+  <h2>Turno 3 — O Fechamento</h2>
+  <div class="example-box" style="font-style:normal"><div class="ex">Narração</div><p><strong>Tero explora "Caçado"</strong> — 1 Fôlego. Usa Rugido Dominante — 2 Fôlego. Rola Vontade: 5+6=11+1=12. <strong>Sucesso Pleno.</strong></p><p style="font-style:italic">"Tero se ergue. O rugido faz as folhas tremerem. O javali — Ferido, Sangrando, Caçado — olha para a saída bloqueada... e decide que não é esse o dia para morrer. Recua para a água. A matilha ganha o território."</p><p style="margin-top:12px;font-weight:600">3 turnos. Cooperação eficiente. Zero mortes. A matilha venceu — e o javali sobreviveu para aprender a lição.</p></div>
+  <hr class="orn">
+  <p style="text-align:center;font-style:italic;color:var(--ash)">O javali sobreviveu. A matilha também. Mas todos os presentes sabem quem caçou e quem foi caçado.</p>
+</div>
+
+<!-- ═══════════════════════ MESTRE ═══════════════════════ -->
+<div class="chapter" id="ch-mestre">
+  <div class="ch-header">
+    <div class="ch-num">Capítulo XIII</div>
+    <div class="ch-title">O Olhar que Não Veem</div>
+    <div class="ch-epigraph">"O Mestre não joga contra os jogadores. Ele joga com o mundo."</div>
+  </div>
+  <p class="drop-cap">Ser Mestre em Instintos da Caça é ser o ecossistema. Você não interpreta um vilão tentando matar os jogadores — você é a floresta, o clima, os outros animais, a passagem do tempo e a consequência de cada escolha.</p>
+  <div class="attr-grid">
+    <div class="attr-card"><div class="attr-name">🌿 Descreva Sensorialmente</div><div class="attr-desc">Criaturas não pensam em mapas — elas sentem. Diga o que cheira, o que ressoa, o que a pele percebe antes dos olhos. "Você sente a temperatura do solo mudar antes de ver a neve."</div></div>
+    <div class="attr-card"><div class="attr-name">⚡ Nunca "Nada Acontece"</div><div class="attr-desc">Uma falha é sempre o Mestre tomando um turno. Um movimento bom cria novas escolhas, não apenas dor. Crie sua lista de movimentos antes de cada sessão.</div></div>
+    <div class="attr-card"><div class="attr-name">🐾 Motivações, não Maldade</div><div class="attr-desc">Nenhuma criatura no jogo é "o vilão". Predadores caçam porque precisam. Presas fogem porque querem viver. Motivações tornam escolhas mais difíceis — e mais interessantes.</div></div>
+    <div class="attr-card"><div class="attr-name">🔥 Pressione o Fôlego</div><div class="attr-desc">Crie situações que exijam Fôlego antes do combate — perseguições, terreno difícil — para que os jogadores cheguem já parcialmente gastos. Isso é design de tensão, não crueldade.</div></div>
+    <div class="attr-card"><div class="attr-name">🌙 Recompense a Cooperação</div><div class="attr-desc">Quando a matilha usa condições em conjunto e o plano funciona, descreva o resultado de forma épica. A cooperação deve <em>sentir</em> como cooperação — fluida, instintiva.</div></div>
+    <div class="attr-card"><div class="attr-name">🩸 Morte Significativa</div><div class="attr-desc">Mortes baratas destroem campanhas. A morte deve ser resultado de escolhas acumuladas, não de um único azar. Quando chega, ela deve ter peso real.</div></div>
+  </div>
+  <div class="goldbox"><div class="rl">Pergunta Guia</div>Antes de descrever qualquer coisa, pergunte a si mesmo: <em>"O que o mundo quer neste momento?"</em> Não o que você quer como narrador — o que o ecossistema, com suas pressões, suas fomes e seus medos, produziria naturalmente aqui?</div>
+</div>
+
+<!-- ═══════════════════════ FICHA INTERATIVA ═══════════════════════ -->
+<div class="chapter" id="ch-ficha">
+<div class="sheet-bg">
+<div class="sheet-paper">
+  <div class="sheet-title">Instintos da Caça · Ficha de Criatura</div>
+
+  <!-- DADOS BÁSICOS -->
+  <div class="sheet-top">
+    <div class="sf"><label>Nome da Criatura</label><input type="text" id="nome" placeholder="Como ela é chamada..."></div>
+    <div class="sf"><label>Espécie</label><input type="text" id="especie" placeholder="Lobo, Gato, Tatu..."></div>
+    <div class="sf"><label>Conceito</label><input type="text" id="conceito" placeholder="Em uma frase..."></div>
+  </div>
+  <div class="sheet-top">
+    <div class="sf"><label>Instinto Base</label><input type="text" id="instinto" placeholder="Ex: Instinto do Felino"></div>
+    <div class="sf"><label>Jogador</label><input type="text" id="jogador" placeholder="Seu nome..."></div>
+    <div class="sf"><label>Campanha / Sessão</label><input type="text" id="campanha" placeholder="Nome da aventura..."></div>
+  </div>
+
+  <!-- ATRIBUTOS -->
+  <div style="margin:16px 0 8px"><div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--ash);margin-bottom:8px">Atributos</div>
+  <div class="attr-row">
+    <div class="attr-box"><label>Força</label><input type="number" id="forca" value="0" min="-1" max="3" oninput="updateTotal()"></div>
+    <div class="attr-box"><label>Agilidade</label><input type="number" id="agi" value="0" min="-1" max="3" oninput="updateTotal()"></div>
+    <div class="attr-box"><label>Mente</label><input type="number" id="mente" value="0" min="-1" max="3" oninput="updateTotal()"></div>
+    <div class="attr-box"><label>Vontade</label><input type="number" id="von" value="0" min="-1" max="3" oninput="updateTotal()"></div>
+  </div>
+  <div id="attr-warn" style="font-family:'Cinzel',serif;font-size:10px;color:var(--blood);text-align:center;margin-top:4px;min-height:16px"></div>
+  </div>
+
+  <!-- FÔLEGO -->
+  <div class="folego-section">
+    <div class="folego-label">Fôlego</div>
+    <div class="folego-controls">
+      <div class="folego-max-ctrl">
+        <label>Máx.</label>
+        <input type="number" id="folego-max" value="6" min="1" max="10" oninput="updateFolego()">
+      </div>
+      <div class="folego-pips" id="pips-container"></div>
+      <button onclick="resetFolego()" style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:1px;background:none;border:1px solid var(--parchment-border);color:var(--ash);padding:4px 10px;cursor:pointer;border-radius:2px">Recuperar</button>
+    </div>
+    <div class="folego-status" id="folego-status-text">Fôlego pleno — você está no controle.</div>
+    <div class="folego-penalty" id="folego-penalty"></div>
+  </div>
+
+  <!-- ESTADOS -->
+  <div style="margin:14px 0 8px"><div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--ash);margin-bottom:8px">Estado de Saúde</div>
+  <div class="estado-track">
+    <button class="estado-btn inteiro sel" onclick="setEstado(this,'inteiro')">Inteiro</button>
+    <button class="estado-btn arranhado" onclick="setEstado(this,'arranhado')">Arranhado<br><span style="font-size:9px;font-family:'Crimson Text'">−1 For/Agi</span></button>
+    <button class="estado-btn ferido" onclick="setEstado(this,'ferido')">Ferido<br><span style="font-size:9px;font-family:'Crimson Text'">−2 For/Agi · −1 Men/Von</span></button>
+    <button class="estado-btn critico" onclick="setEstado(this,'critico')">Crítico<br><span style="font-size:9px;font-family:'Crimson Text'">Sobrevivência a cada rodada</span></button>
+  </div>
+  </div>
+
+  <!-- EQUIPMENT LAYOUT -->
+  <div style="margin:18px 0 8px"><div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--ash);margin-bottom:12px">Equipamentos</div>
+
+  <div class="equip-layout">
+    <!-- ESQUERDA: mão esquerda + escudo -->
+    <div class="equip-side">
+      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--ash);text-align:center;margin-bottom:4px">Lado Esquerdo</div>
+      <div class="slot-drop" id="slot-esq" onclick="openPicker('esq','Mão Esquerda','left')">
+        <button class="slot-remove" onclick="clearSlot(event,'esq')">×</button>
+        <span class="slot-label">🤜 Mão Esquerda</span>
+        <span class="slot-empty-hint">Clique para equipar</span>
+      </div>
+    </div>
+
+    <!-- CENTRO: silhueta -->
+    <div class="equip-center">
+      <div class="slot-drop" id="slot-cabeca" onclick="openPicker('cabeca','Cabeça','head')" style="width:140px;text-align:center">
+        <button class="slot-remove" onclick="clearSlot(event,'cabeca')">×</button>
+        <span class="slot-label">🪖 Cabeça</span>
+        <span class="slot-empty-hint">Clique para equipar</span>
+      </div>
+      <svg viewBox="0 0 120 200" width="120" height="200" style="margin:4px 0">
+        <ellipse cx="60" cy="28" rx="22" ry="24" fill="#c9a96e" stroke="#8b6230" stroke-width="1.5"/>
+        <rect x="35" y="50" width="50" height="70" rx="8" fill="#c9a96e" stroke="#8b6230" stroke-width="1.5"/>
+        <rect x="15" y="52" width="20" height="55" rx="6" fill="#c9a96e" stroke="#8b6230" stroke-width="1.5"/>
+        <rect x="85" y="52" width="20" height="55" rx="6" fill="#c9a96e" stroke="#8b6230" stroke-width="1.5"/>
+        <rect x="38" y="122" width="20" height="65" rx="6" fill="#c9a96e" stroke="#8b6230" stroke-width="1.5"/>
+        <rect x="62" y="122" width="20" height="65" rx="6" fill="#c9a96e" stroke="#8b6230" stroke-width="1.5"/>
+        <circle cx="48" cy="22" r="5" fill="#8b6230"/>
+        <circle cx="72" cy="22" r="5" fill="#8b6230"/>
+        <ellipse cx="60" cy="35" rx="8" ry="4" fill="#8b6230"/>
+        <text x="60" y="92" text-anchor="middle" font-family="serif" font-size="9" fill="#5a3e1a">corpo</text>
+      </svg>
+      <div class="slot-drop" id="slot-corpo" onclick="openPicker('corpo','Corpo','body')" style="width:140px;text-align:center">
+        <button class="slot-remove" onclick="clearSlot(event,'corpo')">×</button>
+        <span class="slot-label">🧥 Corpo</span>
+        <span class="slot-empty-hint">Clique para equipar</span>
+      </div>
+    </div>
+
+    <!-- DIREITA: mão direita -->
+    <div class="equip-side">
+      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--ash);text-align:center;margin-bottom:4px">Lado Direito</div>
+      <div class="slot-drop" id="slot-dir" onclick="openPicker('dir','Mão Direita','right')">
+        <button class="slot-remove" onclick="clearSlot(event,'dir')">×</button>
+        <span class="slot-label">🤛 Mão Direita</span>
+        <span class="slot-empty-hint">Clique para equipar</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOLEGO PENALTY DE EQUIPAMENTO -->
+  <div id="equip-folego-info" style="font-family:'Cinzel',serif;font-size:10px;color:var(--blood);text-align:center;margin:6px 0;min-height:16px"></div>
+
+  <!-- TRANQUEIRAS -->
+  <div style="margin:16px 0 8px">
+    <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--ash);margin-bottom:8px">Tranqueiras (8 slots)</div>
+    <div class="trinket-grid" id="trinket-grid"></div>
+  </div>
+  </div>
+
+  <!-- CARACTERÍSTICAS -->
+  <div style="margin:16px 0">
+    <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--ash);margin-bottom:8px">Características Animais</div>
+    <div class="sheet-tags" id="traits-tags"></div>
+    <button class="add-tag-btn" onclick="addTrait()">+ Adicionar Característica</button>
+  </div>
+
+  <!-- HABILIDADES -->
+  <div style="margin:16px 0">
+    <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--ash);margin-bottom:8px">Habilidades de Instinto</div>
+    <div class="sheet-tags" id="hab-tags"></div>
+    <button class="add-tag-btn" onclick="addHab()">+ Adicionar Habilidade</button>
+  </div>
+
+  <!-- CONDIÇÕES ATIVAS -->
+  <div style="margin:16px 0">
+    <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--ash);margin-bottom:8px">Condições Ativas</div>
+    <div class="sheet-tags" id="cond-tags"></div>
+    <button class="add-tag-btn" onclick="addCond()">+ Adicionar Condição</button>
+  </div>
+
+  <!-- NOTAS -->
+  <div class="notes-grid">
+    <div class="note-block"><label>O que ela mais teme</label><textarea id="nota-teme" placeholder="..."></textarea></div>
+    <div class="note-block"><label>O que ela mais deseja</label><textarea id="nota-deseja" placeholder="..."></textarea></div>
+    <div class="note-block"><label>O que jamais faria</label><textarea id="nota-nunca" placeholder="..."></textarea></div>
+    <div class="note-block"><label>Marcos de Evolução</label><textarea id="nota-marcos" placeholder="Conquistas narrativas..."></textarea></div>
+  </div>
+  <div class="note-block" style="margin-top:12px"><label>Notas Livres</label><textarea id="nota-livre" style="width:100%;font-family:'Crimson Text',Georgia,serif;font-size:14px;background:rgba(255,255,255,.3);border:1px solid var(--parchment-border);border-radius:2px;padding:8px;color:var(--ink);resize:vertical;min-height:80px;outline:none" placeholder="Observações, itens especiais, história da criatura..."></textarea></div>
+
+  <div class="sheet-actions">
+    <button class="btn-clear" onclick="clearSheet()">Limpar Ficha</button>
+    <button class="btn-print" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ═══ MODAL ITEM PICKER ═══ -->
+<div class="modal-overlay" id="modal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="modal-title" id="modal-title">Escolher Item</div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<div class="page-footer">Instintos da Caça · Livro Oficial de Regras · Primeira Edição</div>
+
+</div><!-- /page-wrap -->
+
+<script>
+// ═══ NAV ═══
+function sc(id){
+  document.querySelectorAll('.chapter').forEach(c=>c.classList.remove('active'));
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
+  document.getElementById('ch-'+id).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// ═══ ATRIBUTOS ═══
+function updateTotal(){
+  const v=[+document.getElementById('forca').value,+document.getElementById('agi').value,+document.getElementById('mente').value,+document.getElementById('von').value];
+  const sum=v.reduce((a,b)=>a+b,0);
+  const warn=document.getElementById('attr-warn');
+  if(sum!==4) warn.textContent=`Total atual: ${sum}/4 — distribua exatamente +2, +1, +1, 0`;
+  else warn.textContent='';
+}
+
+// ═══ FÔLEGO ═══
+let pipsUsed=0;
+function updateFolego(){
+  const max=+document.getElementById('folego-max').value||6;
+  const container=document.getElementById('pips-container');
+  container.innerHTML='';
+  pipsUsed=Math.min(pipsUsed,max);
+  for(let i=0;i<max;i++){
+    const pip=document.createElement('div');
+    pip.className='pip'+(i<pipsUsed?' used':'');
+    pip.textContent=i<pipsUsed?'○':'◉';
+    pip.onclick=()=>togglePip(i,max);
+    container.appendChild(pip);
+  }
+  updateFolegoStatus(max-pipsUsed,max);
+}
+function togglePip(idx,max){
+  const pips=document.querySelectorAll('.pip');
+  const remaining=max-pipsUsed;
+  if(pips[idx].classList.contains('used')){pipsUsed--;pips[idx].classList.remove('used');pips[idx].textContent='◉';}
+  else{pipsUsed++;pips[idx].classList.add('used');pips[idx].textContent='○';}
+  updateFolegoStatus(max-pipsUsed,max);
+}
+function resetFolego(){pipsUsed=0;updateFolego();}
+function updateFolegoStatus(rem,max){
+  const s=document.getElementById('folego-status-text');
+  const p=document.getElementById('folego-penalty');
+  if(rem===max){s.textContent='Fôlego pleno — você está no controle.';p.textContent='';}
+  else if(rem>=4){s.textContent=`${rem} pontos — ainda há energia para reagir.`;p.textContent='';}
+  else if(rem>=2){s.textContent=`${rem} pontos — cada ação precisa contar.`;p.textContent='';}
+  else if(rem===1){s.textContent='1 ponto — você está no limite.';p.textContent='⚠ Próxima falha pode ser decisiva';}
+  else{s.textContent='Fôlego esgotado — você não pode reagir.';p.textContent='⚠ EXAUSTÃO: −1 em tudo · Sem Reações · Dano avança 2 estados';}
+}
+
+// ═══ ESTADOS ═══
+function setEstado(btn,est){
+  document.querySelectorAll('.estado-btn').forEach(b=>{b.classList.remove('sel')});
+  btn.classList.add('sel');
+}
+
+// ═══ TAGS (traits, habs, condições) ═══
+function addTag(containerId,val){
+  const c=document.getElementById(containerId);
+  const tag=document.createElement('span');
+  tag.className='sheet-tag';
+  tag.innerHTML=`${val}<span class="rt" onclick="this.parentElement.remove()">×</span>`;
+  c.appendChild(tag);
+}
+const traits=['Garras Retráteis','Furtivo','Emboscador','Animal Grande','Animal Pequeno','Corpo Compacto','Monstruoso','Predador Nato','Resistente','Territorial','Caçador de Matilha','Solitário','Oportunista','Persistente','Carapaça','Cauda Forte','Presas Venenosas','Espinhos Dorsais','Visão Noturna','Olfato Apurado','Pelagem Camuflada','Perseguidor','Carrinheiro','Recuperação Rápida','Pele de Ferro','Memória de Território','Instinto de Fuga','Comunicação da Matilha'];
+const habs=['Cerco Coordenado','Uivo de Rally','Flanqueador','Espera Silenciosa','Bote Certeiro','Sombra em Movimento','Muralha de Carne','Rugido Dominante','Territorialidade','Visão Superior','Mergulho Rasante','Bússola Interna','Bote Preciso','Espiral Venenosa','Muda de Pele'];
+const conds=['Observado','Caçado','Exposto','Caído','Acuado','Sangrando','Desequilibrado','Aterrorizado','Cego','Imobilizado','Envenenado','Desorientado','Exausto','Abalado','Isolado','Marcado'];
+
+function addTrait(){
+  const v=prompt('Característica:\n\n'+traits.join(', ')+'\n\nOu digite uma nova:');
+  if(v&&v.trim()) addTag('traits-tags',v.trim());
+}
+function addHab(){
+  const v=prompt('Habilidade de Instinto:\n\n'+habs.join(', ')+'\n\nOu digite uma nova:');
+  if(v&&v.trim()) addTag('hab-tags',v.trim());
+}
+function addCond(){
+  const v=prompt('Condição Ativa:\n\n'+conds.join(', ')+'\n\nOu digite uma nova:');
+  if(v&&v.trim()) addTag('cond-tags',v.trim());
+}
+
+// ═══ TRANQUEIRAS ═══
+const trinketNames=['🌿 Erva Medicinal','🍄 Fungo Estimulante','🐝 Ferrão de Vespa (×3)','🌊 Água do Rio','🪤 Armadilha de Galhos','🌶 Pó Irritante (×2)','🦟 Resina Grudenta','🔥 Musgo Inflamável','🎯 Pedras de Arremesso (×5)','📯 Osso Sônico','🕸 Fio de Teia (×3)','🌰 Fruto Amargo'];
+let trinkets=Array(8).fill(null);
+function buildTrinkets(){
+  const g=document.getElementById('trinket-grid');
+  g.innerHTML='';
+  for(let i=0;i<8;i++){
+    const d=document.createElement('div');
+    d.className='trinket-slot'+(trinkets[i]?' has-item':'');
+    d.onclick=()=>pickTrinket(i);
+    d.innerHTML=trinkets[i]
+      ?`<div class="tn">Slot ${i+1}</div><div class="ti">${trinkets[i]}</div><div class="ts" onclick="clearTrinket(event,${i})">× remover</div>`
+      :`<div class="tn">Slot ${i+1}</div><div style="font-size:11px;color:#b89050;font-style:italic;margin-top:4px">vazio</div>`;
+    g.appendChild(d);
+  }
+}
+function pickTrinket(i){
+  const v=prompt('Escolha uma tranqueira:\n\n'+trinketNames.join('\n')+'\n\nOu digite um item personalizado:');
+  if(v&&v.trim()){trinkets[i]=v.trim();buildTrinkets();}
+}
+function clearTrinket(e,i){e.stopPropagation();trinkets[i]=null;buildTrinkets();}
+
+// ═══ ITEM PICKER (SLOTS PRINCIPAIS) ═══
+const itemsDB={
+  head:[
+    {n:'Máscara de Ossos',d:'Intimidante. +1 Vontade em intimidações.',f:'−1 Fôlego Máx.',weight:'Médio'},
+    {n:'Coroa de Espinhos',d:'Dano de retorno ao atacante em acerto crítico.',f:'Sem penalidade',weight:'Leve'},
+    {n:'Elmo de Pedra',d:'Imune a Desorientado e Cego por impacto.',f:'−2 Fôlego Máx.',weight:'Pesado'},
+    {n:'Pigmentos de Camuflagem',d:'Inimigos com Desvantagem para aplicar Observado.',f:'Sem penalidade',weight:'Leve'},
+  ],
+  body:[
+    {n:'Couro de Predador',d:'Esquiva gratuita 1× por combate.',f:'−1 Fôlego Máx.',weight:'Médio'},
+    {n:'Escamas Sobrepostas',d:'−1 Agi. Dano frontal: atacante com Desvantagem.',f:'−2 Fôlego Máx.',weight:'Pesado'},
+    {n:'Manto de Folhagem',d:'Em floresta: +1 Agi furtivo.',f:'Sem penalidade',weight:'Leve'},
+    {n:'Armadura de Ossos',d:'Aplica Acuado ao primeiro inimigo que te atacar.',f:'−2 Fôlego Máx.',weight:'Pesado'},
+  ],
+  left:[
+    {n:'Garra de Pedra Lascada',d:'Sucesso: aplica Sangrando. (1 Mão)',f:'Sem penalidade',weight:'Leve'},
+    {n:'Dente Envenenado',d:'Parcial: ainda aplica Envenenado. (1 Mão)',f:'Sem penalidade',weight:'Leve'},
+    {n:'Osso Curvo',d:'Contra-ataques com +1. (1 Mão)',f:'Sem penalidade',weight:'Médio'},
+    {n:'Concha Afiada',d:'Escolha: dano OU Desequilibrado. (1 Mão)',f:'Sem penalidade',weight:'Leve'},
+    {n:'Carapaça de Tartaruga',d:'Escudo. Esquiva gratuita 1× por rodada.',f:'−1 Fôlego Máx.',weight:'Escudo'},
+    {n:'Tronco de Madeira',d:'Escudo pesado. Bloqueia sem rolagem 1×/combate.',f:'−2 Fôlego Máx. · −1 Agi',weight:'Escudo'},
+    {n:'Nada (mão livre)',d:'Permite Contra-ataques sem custo extra.',f:'Sem penalidade',weight:'—'},
+  ],
+  right:[
+    {n:'Garra de Pedra Lascada',d:'Sucesso: aplica Sangrando. (1 Mão)',f:'Sem penalidade',weight:'Leve'},
+    {n:'Dente Envenenado',d:'Parcial: ainda aplica Envenenado. (1 Mão)',f:'Sem penalidade',weight:'Leve'},
+    {n:'Osso Curvo',d:'Contra-ataques com +1. (1 Mão)',f:'Sem penalidade',weight:'Médio'},
+    {n:'Concha Afiada',d:'Escolha: dano OU Desequilibrado. (1 Mão)',f:'Sem penalidade',weight:'Leve'},
+    {n:'Chifres de Veado',d:'(2 Mãos) Dano + Caído. Até 2 alvos adjacentes. Esquiva +1 Fôlego.',f:'−1 Fôlego Máx.',weight:'Pesado'},
+    {n:'Lança de Espinho',d:'(2 Mãos) Alcance longo. Primeiro ataque com Vantagem. Esquiva +1 Fôlego.',f:'Sem penalidade',weight:'Médio'},
+    {n:'Mandíbula de Crocodilo',d:'(2 Mãos) Dano + Imobilizado. Esquiva +1 Fôlego.',f:'−2 Fôlego Máx.',weight:'Pesado'},
+    {n:'Garras Duplas de Águia',d:'(2 Mãos) Ataque duplo. 2ª rolagem −1. Esquiva +1 Fôlego.',f:'Sem penalidade',weight:'Médio'},
+  ]
+};
+
+let currentSlot='';
+function openPicker(slot,title,type){
+  currentSlot=slot;
+  document.getElementById('modal-title').textContent='Equipar: '+title;
+  const body=document.getElementById('modal-body');
+  body.innerHTML='';
+  const items=itemsDB[type]||[];
+  body.innerHTML='<div class="modal-category">Itens Disponíveis</div>';
+  const list=document.createElement('div');
+  list.className='item-list';
+  items.forEach(item=>{
+    const el=document.createElement('div');
+    el.className='item-option';
+    el.innerHTML=`<div class="io-left"><div class="io-name">${item.n}</div><div class="io-desc">${item.d}</div></div><div class="io-right"><div class="io-stat">${item.weight}</div><div class="io-folego">${item.f}</div></div>`;
+    el.onclick=()=>equipItem(slot,item);
+    list.appendChild(el);
+  });
+  body.appendChild(list);
+  document.getElementById('modal').classList.add('open');
+}
+function equipItem(slot,item){
+  const el=document.getElementById('slot-'+slot);
+  el.classList.add('has-item');
+  el.innerHTML=`<button class="slot-remove" onclick="clearSlot(event,'${slot}')">×</button><span class="slot-label">${slot==='cabeca'?'🪖 Cabeça':slot==='corpo'?'🧥 Corpo':slot==='esq'?'🤜 Mão Esquerda':'🤛 Mão Direita'}</span><div class="slot-item-name">${item.n}</div><div class="slot-item-stat">${item.d}</div><div style="font-family:'Cinzel',serif;font-size:10px;color:var(--blood);margin-top:2px">${item.f}</div>`;
+  closeModal();
+  updateEquipFolego();
+}
+function clearSlot(e,slot){
+  e.stopPropagation();
+  const el=document.getElementById('slot-'+slot);
+  el.classList.remove('has-item');
+  const labels={cabeca:'🪖 Cabeça',corpo:'🧥 Corpo',esq:'🤜 Mão Esquerda',dir:'🤛 Mão Direita'};
+  el.innerHTML=`<button class="slot-remove" onclick="clearSlot(event,'${slot}')">×</button><span class="slot-label">${labels[slot]}</span><span class="slot-empty-hint">Clique para equipar</span>`;
+  updateEquipFolego();
+}
+function closeModal(){document.getElementById('modal').classList.remove('open');}
+document.getElementById('modal').onclick=function(e){if(e.target===this)closeModal();}
+
+function updateEquipFolego(){
+  const slots=['cabeca','corpo','esq','dir'];
+  let total=0;
+  const penalties=[];
+  slots.forEach(s=>{
+    const el=document.getElementById('slot-'+s);
+    if(el.classList.contains('has-item')){
+      const txt=el.querySelector('[style*="color:var(--blood)"]');
+      if(txt){
+        const t=txt.textContent;
+        if(t.includes('−2'))penalties.push('−2');
+        else if(t.includes('−1'))penalties.push('−1');
+      }
+    }
+  });
+  const totalPenalty=penalties.reduce((a,b)=>a+(b==='−2'?2:1),0);
+  const info=document.getElementById('equip-folego-info');
+  if(totalPenalty>0) info.textContent=`⚠ Equipamentos reduzem Fôlego Máximo em ${totalPenalty}. Ajuste o controle acima.`;
+  else info.textContent='';
+}
+
+// ═══ LIMPAR FICHA ═══
+function clearSheet(){
+  if(!confirm('Limpar toda a ficha? Esta ação não pode ser desfeita.'))return;
+  ['nome','especie','conceito','instinto','jogador','campanha','nota-teme','nota-deseja','nota-nunca','nota-marcos','nota-livre'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  ['forca','agi','mente','von'].forEach(id=>{document.getElementById(id).value='0';});
+  pipsUsed=0;updateFolego();
+  document.querySelectorAll('.estado-btn').forEach(b=>b.classList.remove('sel'));
+  document.querySelector('.estado-btn.inteiro').classList.add('sel');
+  ['traits-tags','hab-tags','cond-tags'].forEach(id=>{document.getElementById(id).innerHTML='';});
+  ['cabeca','corpo','esq','dir'].forEach(s=>clearSlot({stopPropagation:()=>{}},s));
+  trinkets=Array(8).fill(null);buildTrinkets();
+  updateTotal();updateEquipFolego();
+}
+
+// ═══ INIT ═══
+updateFolego();
+buildTrinkets();
+</script>
+</body>
+</html>
